@@ -1,6 +1,5 @@
 uploads/
 backup/
-ShareAndTalk/settings.py
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -164,3 +163,4 @@ cython_debug/
 
 # Vscode
 .vscode/
+.ShareAndTalk/settings.py

@@ -137,7 +137,7 @@ DEFAULT_RECIPIENT_LIST = ['Your Email']
 ```
 
 将`EMAIL_HOST_USER`，`EMAIL_HOST_PASSWORD`，`DEFAULT_FROM_EMAIL`修改为你自己的邮箱和秘钥
-此处默认设置为qq邮箱，若需要更改，请参考[django邮箱配置]()
+此处默认设置为qq邮箱，若需要更改，请参考[django邮箱配置](https://docs.djangoproject.com/zh-hans/4.1/ref/settings/)
 
 将`DEFAULT_FROM_EMAIL`改为收件邮箱地址
 
