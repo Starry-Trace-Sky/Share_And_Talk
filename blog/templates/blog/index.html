@@ -1,17 +1,9 @@
 {% extends 'blog/base.html' %}
 {% load static %}
 {% block content %}
-    <link rel='stylesheet' id='kratos-style-css' href='{% static 'blog/css/share.css' %}?ver=2.5.2' type='text/css'
-          media='all'/>
-    <ul id="shareul">
-        <li><a href="javascript:"><i class="bi bi-facebook"></i></a></li>
-        <li><a href="javascript:"><i class="bi bi-twitter"></i></a></li>
-        <li><a href="javascript:"><i class="bi bi-google"></i></a></li>
-        <li><a href="javascript:"><i class="bi bi-wechat"></i></a></li>
-    </ul>
     <div class="container" style="background-color:rgba(0,0,0,0);">
         <div class="row">
-            <section id="main" class="col-md-8">
+            <section id="main" class="col-lg-8 offset-lg-2">
                 {% for article in articles %}
                     <article class="card mb-3 p-3">
                         <div class="row g-3">
@@ -52,8 +44,10 @@
 
                                 <div class="fw-light">
                                     <header class="kratos-entry-header-new d-flex justify-content-between">
-                                        <span class="h5 card-title text-nowrap overflow-hidden"><a
+                                        <span class="h5 card-title text-nowrap overflow-hidden">
+                                            <a
                                                 class="link-dark text-decoration-none stretched-link"
+                                                title="{{ article.title }}"
                                                 href="{% url 'blog:article' id=article.id year=article.pub_date.year month=article.pub_date.month day=article.pub_date.day %}">{{ article.title }}</a></span>
                                         <div class="text-nowrap" style="border-left:5px solid white">
                                             <!--一级分类-->
@@ -72,8 +66,8 @@
 
                             <div style="font-size:12px" class="mt-1">
             <span class="visible-lg visible-md visible-sm pull-left">
-            <a class="text-decoration-none link-secondary" href="javascript:"><i class="bi bi-calendar-heart-fill"></i>发布日期 {{ article.pub_date }}</a>
-            <a class="text-decoration-none link-secondary" href="javascript:"><i class="bi bi-calendar-heart-fill"></i>修改日期 {{ article.modify_date }}</a>
+            <!-- <a class="text-decoration-none link-secondary" href="javascript:"><i class="bi bi-calendar-heart-fill"></i>发布日期 {{ article.pub_date }}</a> -->
+            <a class="text-decoration-none link-secondary" href="javascript:"><i class="bi bi-calendar-heart-fill"></i>日期 {{ article.modify_date }}&nbsp;</a>
             </span>
                                 <span class="pull-left">
             <a class="text-decoration-none link-secondary" href="javascript:"><i
@@ -87,11 +81,11 @@
                                                 class="bi bi-shield-lock-fill"></i>私密</a>
                                     {% endif %}
             </span>
-                                <span class="pull-right">
+                                <!-- <span class="pull-right">
             <a class="link-secondary text-decoration-none"
                href="{% url 'blog:article' id=article.id year=article.pub_date.year month=article.pub_date.month day=article.pub_date.day %}">阅读全文 <i
                     class="bi bi-arrow-up-left-circle-fill"></i></a>
-            </span>
+            </span> -->
                             </div>
 
                         </div>
@@ -103,7 +97,6 @@
                 <div class="text-center" id="page-footer">
                 </div>
             </section>
-            {% include 'blog/components/sidebar.html' %}
             {% include 'blog/components/pagination.html' %}
 
 

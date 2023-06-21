@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.shortcuts import render
+import pysnooper
 
 
 def getSign(rq, template, context):

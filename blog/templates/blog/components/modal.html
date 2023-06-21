@@ -42,7 +42,7 @@
                            placeholder="请输入与Gravatar绑定的邮箱" aria-label="qq" aria-describedby="basic-addon1" required>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-primary" onclick="startGravatar()">开始同步</button>
+                <button id="gravatar" type="submit" class="btn btn-primary">开始同步</button>
                 </form>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
             </div>
@@ -106,8 +106,14 @@
                 请您确认真的要永久删除文章吗？🤔
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" onclick="dell()">确认</button>
+                <button id="delBt" type="button" class="btn btn-danger">确认</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                <script>
+                    const bt = document.getElementById('delBt')
+                    bt.addEventListener('click', function(){
+                        dell()
+                    })
+                </script>
             </div>
         </div>
     </div>

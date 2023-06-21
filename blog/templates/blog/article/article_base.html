@@ -110,6 +110,16 @@
             src: url("{% static 'blog/font/jf-openhuninn-2.0.ttf' %}");
         }
 
+        @font-face {
+            font-family: "DongQing";
+            src: url("{% static 'blog/font/DongQingHeiTiJianTiZhongWen-W6-2.ttc' %}")
+        }
+
+        @font-face {
+            font-family: "monospace";
+            src: url("{% static 'blog/font/monospace.ttf' %}")
+        }
+
         .carousel-item {
             height: 300px;
         }
@@ -253,4 +263,22 @@
             {% block content %}{% endblock content %}
 
             <!--footer尾部-->
+            {% comment %} 给公开文章添加评论内容 {% endcomment %}
+            {% if passage.public %}
+            <script src="https://giscus.app/client.js"
+                data-repo="Skyler-Sun/Share_And_Talk"
+                data-repo-id="R_kgDOJyH9YA"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOJyH9YM4CXXR4"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="bottom"
+                data-theme="light_high_contrast"
+                data-lang="zh-CN"
+                crossorigin="anonymous"
+                async>
+            </script>
+            {% endif %}
 {% include 'blog/base_footer.html' %}

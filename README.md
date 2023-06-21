@@ -8,7 +8,7 @@
 ![](https://img.shields.io/badge/Framework-Django-yellow)
 ![](https://img.shields.io/badge/Latest_Version-v1.3.5-brightgreen)
 
-![网站主页](2023-06-10_192627.png)
+![网站主页](2023-06-21_233957.png)
 
 ## 功能介绍😁
 

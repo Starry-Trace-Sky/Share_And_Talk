@@ -12,7 +12,7 @@
         var pre_num = pre.length
         for (let i = 0; i < pre_num; i++) {
             pre[i].classList.add('pre' + i)
-            pre[i].classList.add('position-relative')
+            pre[i].classList.add('position-relative','fw-bolder')
             let copy_btn = document.createElement('button')
             copy_btn.className = 'btn' + i
             copy_btn.innerHTML = '<i class="bi bi-clipboard-heart-fill"></i>'
@@ -59,7 +59,7 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
 <div class="container">
     <div class="row g-3">
-        <section id="main" class="col-md-8" style="background-color:rgba(245,245,245,0.4);">
+        <section id="main" class="col-lg-8 offset-lg-2" style="background-color:rgba(245,245,245,0.4);">
             <style>
                 .arti img {
                     max-width: 100%;
@@ -70,12 +70,17 @@
             </style>
             {% if users %}
                 <div class="btn-group my-2" role="group" aria-label="Basic mixed styles example">
-                    <button type="button" class="btn btn-success btn-primary mx-1 rounded-left"
-                            onclick="window.location.href='{% url "blog:edit_article" id=passage.id %}'">编辑文章
+                    <button id="editArticle" type="button" class="btn btn-success btn-primary mx-1 rounded-left">编辑文章
                     </button>
                     <button type="button" class="btn btn-danger btn-primary mx-1 rounded-right" data-bs-toggle="modal"
                             data-bs-target="#delModal">删除文章
                     </button>
+                    <script>
+                        const btt = document.getElementById('editArticle')
+                        btt.addEventListener('click', function(){
+                            window.location.href='{% url "blog:edit_article" id=passage.id %}'
+                        })
+                    </script>
                 </div>
                 <script>
                     function dell() {
@@ -227,7 +232,6 @@
             <div class="text-center" id="page-footer">
             </div>
         </section>
-        {% include 'blog/components/sidebar.html' %}
     </div>
 </div>
 </div>

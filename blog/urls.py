@@ -15,6 +15,7 @@ urlpatterns = [
     path('metas/software/<int:id>/page/<int:pageID>/', viewMetas.metas_software, name='metas_software'),
     # 搜索
     path('search/', viewSearch.search, name='search'),
+    
     # 增添文章
     path('new_article/', viewOperateArticle.newArticle, name='new_article'),
     # 编辑修改文章
@@ -23,10 +24,12 @@ urlpatterns = [
     path('delete_article/<int:id>/', viewOperateArticle.deleteArticle, name='delete_article'),
     # 我的文章
     path('my_articles/', viewMetas.myArticles, name='my_articles'),
+    
     # 页数
     path('pages/', viewPages.pages, name='pages'),
     # 帮助页面
     path('help/', viewArticle.help, name='articleHelp'),
+    
     # 查看评论
     path('query_comment', viewComment.queryComment, name='queryComment'),
     # 添加评论
@@ -35,6 +38,7 @@ urlpatterns = [
     path('edit_comment/', viewComment.editComment, name='editComment'),
     # 删除评论
     path('delete_comment/', viewComment.deleteComment, name='deleteComment'),
+
     # 404
     path('404.html', views.notFound, name='notFound'),
 ]

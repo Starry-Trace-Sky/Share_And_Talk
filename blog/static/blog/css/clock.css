@@ -1,31 +1,31 @@
-#aside-clock {
+.aside-clock {
     font-family: "Share Tech Mono", monospace;
     color: #00c1ff;
     text-shadow: 0 0 20px #0aafe6, 0 0 20px rgba(10, 175, 230, 0);
 }
 
-#aside-clock .time {
+.aside-clock .time {
     letter-spacing: 0;
     font-size: 50px;
     padding: 0;
 }
 
 @media (min-width: 1199.98px) {
-    #aside-clock .time {
+    .aside-clock .time {
         font-size: 80px;
     }
 
-    #aside-clock .date {
+    .aside-clock .date {
         font-size: 30px !important;
     }
 }
 
-#aside-clock .date {
+.aside-clock .date {
     letter-spacing: 0.1em;
     font-size: 20px;
 }
 
-#aside-clock * {
+.aside-clock * {
     padding: 0;
     margin: 0;
 }

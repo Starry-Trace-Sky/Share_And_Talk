@@ -24,9 +24,14 @@ function showTime() {
     // 输出时间字符串
     //console.log(date + ' ' + time); // 输出格式化后的时间字符串
 
-    const aside_clock = document.getElementById('aside-clock')
-    aside_clock.getElementsByClassName('date')[0].innerHTML = date
-    aside_clock.getElementsByClassName('time')[0].innerHTML = time
+    const aside_clock = document.getElementsByClassName('aside-clock')
+
+    for(let i = 0;i < aside_clock.length;i++){
+        aside_clock[i].getElementsByClassName('date')[0].innerHTML = date
+        aside_clock[i].getElementsByClassName('time')[0].innerHTML = time
+    }
+    //aside_clock.getElementsByClassName('date')[0].innerHTML = date
+    //aside_clock.getElementsByClassName('time')[0].innerHTML = time
 
 }
 

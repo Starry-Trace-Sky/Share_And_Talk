@@ -3,15 +3,9 @@
 {% block content %}
     <link rel='stylesheet' id='kratos-style-css' href='{% static 'blog/css/share.css' %}?ver=2.5.2' type='text/css'
           media='all'/>
-    <ul id="shareul">
-        <li><a href="javascript:"><i class="bi bi-facebook"></i></a></li>
-        <li><a href="javascript:"><i class="bi bi-twitter"></i></a></li>
-        <li><a href="javascript:"><i class="bi bi-google"></i></a></li>
-        <li><a href="javascript:"><i class="bi bi-wechat"></i></a></li>
-    </ul>
     <div class="container" style="background-color:rgba(0,0,0,0);">
         <div class="row">
-            <section id="main" class="col-md-8">
+            <section id="main" class="col-lg-8 offset-lg-2">
                 {% for article in articles %}
                     <article class="card mb-3 p-3">
                         <div class="row g-3">
@@ -95,7 +89,6 @@
                 <div class="text-center" id="page-footer">
                 </div>
             </section>
-            {% include 'blog/components/sidebar.html' %}
         </div>
     </div>
     </div>

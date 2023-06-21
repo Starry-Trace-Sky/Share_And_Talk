@@ -7,6 +7,9 @@
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+
+        <!--<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-aside" aria-controls="offcanvasWithBothOptions">Enable both scrolling & backdrop</button>-->
+
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="nav navbar-nav text-white ms-auto">
                 <li class="nav-item dropdown dropdown-hover">
@@ -18,10 +21,11 @@
                     <ul class="dropdown-menu" style="background: rgba(40, 42, 44, .6);font-size: medium;">
                         {% for topmeta in topMetas %}
                             <li><a style="color: white;" class="dropdown-item"
-                                   href="{% url 'blog:metas_top' id=topmeta.id pageID=1 %}">{{ topmeta.text }}</a></li>
+                                   href="{% url 'blog:metas_top' id=topmeta.id pageID=1 %}">{{ topmeta.text }}</a>
+                            </li>
                         {% endfor %}
                     </ul>
-
+                </li>
                 <li class="nav-item dropdown dropdown-hover">
                     <a class="nav-link dropdown-toggle" data-target="#" role="button" data-bs-toggle="dropdown"
                        aria-expanded="false">
@@ -82,45 +86,9 @@
 
                     </style>
                     <div class="nav-item dropdown" id="info-user">
-                        <a class="nav-link dropdown-toggle" href="javascript:" role="button" id="dropdownMenuLink"
-                           data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="{{ user.avatar }}" alt="用户头像" class="user-avatar" style="border-radius: 50%;">
-                            <span class="user-nickname"><strong>{{ user.nickname }}</strong></span>
+                        <a  id="userAvatar" class="nav-link" href="javascript:" role="button" aria-expanded="false">
+                         <img src="{{ user.avatar }}" alt="用户头像" class="user-avatar" style="border-radius: 50%;">
                         </a>
-
-                        <ul class="dropdown-menu text-white" aria-labelledby="dropdownMenuLink"
-                            style="background: rgba(40, 42, 44, .6);">
-                            <li><a class="dropdown-item" href="{% url 'blog:new_article' %}">撰写新文章</a></li>
-                            <li><a class="dropdown-item" href="{% url 'blog:my_articles' %}">我的文章</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">用户中心</a></li>
-                            <li><a class="dropdown-item" href="javascript:" id="qqPhotoA">同步QQ头像</a></li>
-                            <li><a class="dropdown-item" href="javascript:" id="GravatarPhotoA">同步Gravatar头像</a>
-                            </li>
-                            <script>
-                                var a = document.getElementById('qqPhotoA');
-                                a.addEventListener('click', function (event) {
-                                    event.preventDefault();
-                                    var m = $('#qqPhotoModal');
-                                    m.modal('show');
-                                });
-                                var aa = document.getElementById('GravatarPhotoA');
-                                aa.addEventListener('click', function (event) {
-                                    event.preventDefault();
-                                    var mm = $('#GravatarPhotoModal');
-                                    mm.modal('show');
-                                });
-                            </script>
-                            {% if user.is_superuser == True %}
-                                <li><a class="dropdown-item" href="{% url 'api:backup' %}" id="bk">备份数据库</a></li>
-                            {% endif %}
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="{% url 'users:logout' %}?next=/">登出</a></li>
-                        </ul>
                     </div>
                 {% else %}
                     <li class="nav-item mt-1">
@@ -136,3 +104,5 @@
         </div>
     </div>
 </nav>
+
+{% include 'blog/components/offcanvas.html' %}

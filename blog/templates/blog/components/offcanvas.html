@@ -1,0 +1,203 @@
+{% load static %}
+<!--侧边隐藏栏-->
+<div class="offcanvas offcanvas-end rounded" data-bs-scroll="true" tabindex="-1" id="offcanvas-aside" aria-labelledby="offcanvasWithBothOptionsLabel" style="background-color:#e7e5e4;">
+    <div class="offcanvas-header" id="offcanvas-inside">
+        <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Share And Talk</h5>
+    </div>
+    <div class="offcanvas-body">
+        <div class="d-flex gap-1">
+            <div class="flex-grow-1">
+                <img src="{{ user.avatar }}" alt="用户头像" class="user-avatar" style="border-radius: 50%;">
+                <strong>{{ user.nickname }}</strong>
+            </div>    
+            <button id="myAccount" class="btn btn-outline-secondary" type="button" style="width:initial">我的账户</button>
+        </div>
+        <!--offcanvas内容-->
+        <!--用户操作-->
+        <hr class="dropdown-divider">
+        <div class="d-flex gap-1">
+            <button id="myArticle" class="btn btn-primary" type="button">我的文章</button>
+            <button id="newArticle" class="btn btn-success" type="button">撰写新文章</button>
+        </div>
+        <hr class="dropdown-divider">
+        <div class="d-flex gap-1">
+            <button id="qqPhotoA" class="btn btn-secondary" type="button">同步QQ头像</button>
+            <button id="GravatarPhotoA" class="btn btn-secondary" type="button">同步Gravatar头像</button>
+        </div>
+        <hr class="dropdown-divider">
+        {% if user.is_superuser %}
+            <button id="bk" class="btn btn-light" type="button">备份数据库</button>
+            <hr class="dropdown-divider">
+        {% endif %}
+        <button id="logoutBt" class="btn btn-danger" type="button">登出</button>
+        <hr class="dropdown-divider">
+        <style>
+            .offcanvas-body button{
+                width:100%;
+            }
+        </style>
+        <script>
+            var myAc = document.getElementById('myAccount');
+            myAc.addEventListener('click', function(){
+                window.location.href = "{% url 'users:userProfile' %}";
+            })
+            var myarti = document.getElementById('myArticle');
+            myarti.addEventListener('click', function(){
+                window.location.href = "{% url 'blog:my_articles' %}";
+            })
+            var newarti = document.getElementById('newArticle');
+            newarti.addEventListener('click', function(){
+                window.location.href = "{% url 'blog:new_article' %}";
+            })
+            var bkbt = document.getElementById('bk');
+            bkbt.addEventListener('click', function(){
+                window.location.href = "{% url 'api:backup' %}";
+            })
+            var loggoutbt = document.getElementById('logoutBt');
+            loggoutbt.addEventListener('click', function(){
+                window.location.href = "{% url 'users:logout' %}?next=/";
+            })
+            var a = document.getElementById('qqPhotoA');
+            a.addEventListener('click', function (event) {
+                event.preventDefault();
+                var m = $('#qqPhotoModal');
+                m.modal('show');
+            });
+            var aa = document.getElementById('GravatarPhotoA');
+            aa.addEventListener('click', function (event) {
+                event.preventDefault();
+                var mm = $('#GravatarPhotoModal');
+                mm.modal('show');
+            });
+        </script>
+        <!--其余内容-->
+        <aside id="kratos-widget-area">
+            <div id="sidebar">
+                <aside id="kratos_about-5" class="widget amadeus_about clearfix">
+                    <div class="p-2 bg-white fw-bolder" style="margin-bottom:2px;">关于开发者(非文章作者)</div>
+                    <div class="bg-white p-2">
+                        <div class="developer py-1 ps-1">
+                            <img class="rounded-circle float-start me-3" src="{% static 'blog/images/author2.jpg' %}"
+                                 height="50px">
+                            <div class="info clearfix">
+                                <i class="bi bi-person-circle"></i>Skyler
+                                <p class="text-secondary m-0"><small>进可攻AI,退可守后端</small></p>
+                            </div>
+                        </div>
+        
+                        <div class="developer p-2" style="border-top: 1px dashed grey;">
+                            <img class="rounded-circle float-start me-3" src="{% static 'blog/images/author3.jpg' %}"
+                                 height="50px">
+                            <div class="info clearfix">
+                                <i class="bi bi-person-circle"></i>Xu Jia-qi
+                                <p class="text-secondary m-0"><small>进可攻前端,退可守后端</small></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="p-2 bg-white d-flex justify-content-xl-around flex-column flex-xl-row gap-1 justify-content-xxl-evenly">
+        
+                            <a href="/admin" class="btn btn-sm btn-outline-primary">登录后台</a>
+        
+                            <a href="https://github.com/Skyler-Sun/" class="btn btn-sm btn-outline-primary text-nowrap"
+                               target="_blank">后端开发者详情</a>
+                            <a href="https://github.com/XuJiaqi999" class="btn btn-sm btn-outline-primary text-nowrap"
+                               target="_blank">前端开发者详情</a>
+                        </div>
+                    </div>
+                </aside>
+        
+
+                <hr class="border border-secondary border-2 opacity-75">
+
+                <!-- 时钟 -->
+                <aside class="bg-white p-2">
+                    <div class="text-center aside-clock">
+                        <p class="date"></p>
+                        <p class="time"></p>
+                    </div>
+                    <link rel='stylesheet' id='kratos-style-css' href='{% static 'blog/css/clock.css' %}' type='text/css'
+                          media='all'/>
+                    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Share+Tech+Mono">
+                    <script type="text/javascript" src="{% static 'blog/js/clock.js' %}" defer></script>
+                </aside>
+        
+                <hr class="border border-secondary border-2 opacity-75">
+
+                <!--搜索框-->
+                <aside id="kratos_search" class="widget widget_kratos_search clearfix">
+                    <h4 class="mb-1 bg-white"><span class="fs-2 border-end border-primary me-1"><i
+                            class="bi bi-list"></i></span>搜寻🔍</h4>
+                    <form class="bg-white p-1 input-group" role="search" method="get" action="{% url 'blog:search' %}">
+                        <input type="text" name="s" id="s" placeholder="输入关键字" class="form-control" x-webkit-speech=""
+                               required>
+                        <button class="btn btn-outline-primary" type="submit" id="button-addon2">Search<i
+                                class="bi bi-search-heart"></i></button>
+                    </form>
+                </aside>
+
+                <hr class="border border-secondary border-2 opacity-75">
+
+                <!--分类目录-->
+                <aside id="categories-6" class="widget widget_categories clearfix">
+                    <div class="accordion" id="accordionPanelsStayOpenExample">
+                        <div class="accordion-item" style="isolation: isolate">
+                            <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#panelsStayOpen-collapseOne">一级分类目录
+                                </button>
+                            </h2>
+                            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse">
+                                <div class="accordion-body">
+                                    <ul class="list-group list-group-flush">
+                                        {% for topMeta in topMetas %}
+                                            <li class="cat-item list-group-item d-flex justify-content-between align-items-start">
+                                                <a class="d-block link-dark text-decoration-none"
+                                                   href="{% url 'blog:metas_top' id=topMeta.id pageID=1 %}">{{ topMeta.text }}</a>
+                                                <span class="d-block badge bg-primary rounded-pill"> {{ topMeta.meta_top.count }}</span>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="accordion-item" style="isolation: isolate">
+                            <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#panelsStayOpen-collapseOnes">二级分类目录
+                                </button>
+                            </h2>
+                            <div id="panelsStayOpen-collapseOnes" class="accordion-collapse collapse">
+                                <div class="accordion-body">
+                                    <ul class="list-group list-group-flush">
+                                        {% for secondMeta in secondMetas %}
+                                            <li class="cat-item list-group-item d-flex justify-content-between align-items-start">
+                                                <a class="d-block link-dark text-decoration-none"
+                                                   href="{% url 'blog:metas_second' id=secondMeta.id pageID=1 %}">{{ secondMeta.text }}</a>
+                                                <span class="d-block badge bg-primary rounded-pill"> {{ secondMeta.meta_second.count }}</span>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+        
+                        </div>
+                    </div>
+                </aside>
+        
+        
+            </div>
+        </aside>
+    </div>
+</div>
+
+<script>
+    // 点击头像打开侧边栏
+    const avatarTag = document.getElementById('userAvatar')
+    const offcanvasTag = document.getElementById('offcanvas-aside')
+    avatarTag.addEventListener('click', function(){
+        var offcanvasObj = new bootstrap.Offcanvas(offcanvasTag)
+        offcanvasObj.show()
+    })
+</script>
