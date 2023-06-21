@@ -163,4 +163,4 @@ cython_debug/
 
 # Vscode
 .vscode/
-.ShareAndTalk/settings.py
+ShareAndTalk/settings.py
