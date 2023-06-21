@@ -24,6 +24,11 @@
 
 ## 安装配置🍔
 
+下载项目文件
+```bash
+git clone https://github.com/Skyler-Sun/Share_And_Talk.git
+```
+
 安装依赖
 
 ```bash
