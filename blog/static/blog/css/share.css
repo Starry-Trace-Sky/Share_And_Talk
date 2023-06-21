@@ -1,0 +1,116 @@
+/* 侧边 */
+@media (max-width: 1300px) {
+    ul#shareul {
+        display: none;
+    }
+}
+
+ul#shareul {
+    position: fixed;
+    top: 53%;
+    left: 100%;
+    transform: translate(-100%, -50%);
+    margin: 0;
+    padding: 0;
+    margin: 0;
+    padding: 0;
+}
+
+ul#shareul li {
+    list-style: none;
+    margin-bottom: 10px;
+}
+
+ul#shareul li a {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    display: block;
+    text-align: center;
+    margin: 0 10px;
+    border-radius: 50%;
+    padding: 6px;
+    box-sizing: border-box;
+    text-decoration: none;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(0deg, #ddd, #fff);
+    transition: .5s;
+}
+
+ul#shareul li a:hover {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    text-decoration: none;
+}
+
+ul#shareul li a .bi {
+    widht: 100%;
+    height: 100%;
+    display: block;
+    background: linear-gradient(0deg, #fff, #ddd);
+    border-radius: 50%;
+    line-height: calc(60px - 12px);
+    font-size: 24px;
+    color: #262626;
+    transition: .5s;
+}
+
+ul#shareul li:nth-child(1) a:hover .bi {
+    color: #3b5998;
+}
+
+ul#shareul li:nth-child(2) a:hover .bi {
+    color: #00aced;
+}
+
+ul#shareul li:nth-child(3) a:hover .bi {
+    color: #dd4b39;
+}
+
+ul#shareul li:nth-child(4) a:hover .bi {
+    color: #6ce26f;
+}
+
+/* 文章底部 */
+.share-area {
+    position: relative;
+    display: inline-block;
+}
+
+.share-content {
+    display: block;
+    position: absolute;
+    z-index: 1;
+    background-color: #fff;
+    height: 0;
+    overflow: hidden;
+    bottom: 40px;
+    right: 50%;
+    transform: translateX(50%);
+    transition: height 1s ease;
+    border-radius: 10px;
+}
+
+.share-area:hover .share-content {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    display: block;
+    height: 84px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+}
+
+.share-content ul li span {
+    align-items: end;
+}
+
+.share-content ul li {
+    list-style-type: none;
+    width: 70px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    height: 74px;
+}
+
+.share-content ul {
+    padding-left: 0;
+}

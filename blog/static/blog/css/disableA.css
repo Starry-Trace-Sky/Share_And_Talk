@@ -1,0 +1,6 @@
+.link-disabled {
+    pointer-events: none;
+    color: inherit;
+    text-decoration: none;
+}
+  

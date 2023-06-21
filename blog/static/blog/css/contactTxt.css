@@ -1,0 +1,20 @@
+.textarea-wrapper {
+    position: relative;
+}
+
+.textarea-wrapper textarea {
+    border: 1px solid #ccc;
+    background-color: #fff;
+    resize: none;
+}
+
+.textarea-wrapper #charCount {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0);
+    padding: 2px 5px;
+    border: none;
+    border-radius: 3px;
+    font-size: 12px;
+}

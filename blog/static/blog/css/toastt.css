@@ -1,0 +1,19 @@
+@media (max-width: 600px) {
+    .toast {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 9999;
+    }
+}
+
+@media (min-width: 601px) {
+    .toast {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 9999;
+    }
+}
+  
