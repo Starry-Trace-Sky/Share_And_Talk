@@ -1,0 +1,157 @@
+<!-- Modal start -->
+<div class="modal fade" id="qqPhotoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="qqPhotoModalLabel">Share And Talk操作提示</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                请在下方输入您想同步的QQ账号
+                <br>
+                <br>
+                <form action="{% url 'api:qqPhoto' %}" method="post">
+                    {% csrf_token %}
+                    <input id="inputQQ" name="qqAccount" type="number" class="form-control" placeholder="请输入QQ号"
+                           aria-label="qq" aria-describedby="basic-addon1" required>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">开始同步</button>
+                </form>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal end-->
+<!-- Modal start -->
+<div class="modal fade" id="GravatarPhotoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="GravatarPhotoModalLabel">Share And Talk操作提示</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                请在下方输入您想同步的对应Gravatar邮箱
+                <br>
+                <br>
+                <form action="{% url 'api:GravatarPhoto' %}" method="post">
+                    {% csrf_token %}
+                    <input id="inputGravatar" name="GravatarAccount" type="email" class="form-control"
+                           placeholder="请输入与Gravatar绑定的邮箱" aria-label="qq" aria-describedby="basic-addon1" required>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" onclick="startGravatar()">开始同步</button>
+                </form>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal end-->
+<!-- Modal start -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/autosize.js/4.0.2/autosize.min.js"></script>
+<div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="contactModalLabel">Share And Talk用户反馈</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <!--反馈主体-->
+            <div class="modal-body">
+                请在下方输入您的建议和看法📚
+                <br>
+                <br>
+                <form method="post" action="{% url 'api:send_email' %}">
+                    {% csrf_token %}
+                    <div class="form-group textarea-wrapper">
+                        <textarea rows="5" id="contactTxt" class="form-control" data-autosize="true"
+                                  placeholder="在这里输入您的建议和看法，请勿发送任何关于政治等违规内容" required
+                                  name="message" maxlength="1000"></textarea>
+                        <br>
+                        <span id="charCount">0/1000</span>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">发送</button>
+                </form>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    autosize(document.querySelectorAll('textarea'));
+    const textarea = document.getElementById('contactTxt');
+    const charCount = document.getElementById('charCount');
+
+    textarea.addEventListener('input', function () {
+        const maxLength = textarea.maxLength;
+        const currentLength = textarea.value.length;
+        charCount.innerHTML = `${currentLength}/${maxLength}`;
+    });
+</script>
+<!-- Modal end -->
+<!-- delete Modal -->
+<div class="modal fade" id="delModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Share And Talk操作提示</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                请您确认真的要永久删除文章吗？🤔
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" onclick="dell()">确认</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal end -->
+<!-- Modal Copyright-->
+<!-- Scrollable modal -->
+<div class="modal fade" id="copyrightModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Share And Talk Copyright</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    版权声明
+
+                    欢迎访问 Share And Talk 网站。在使用本网站之前，请务必仔细阅读本版权声明以及本网站的全部条款和条件。只要您继续使用本网站，即表示您同意受到本版权声明和条款的约束。
+
+                    1. 版权所有
+
+                    本网站的所有内容（包括但不限于文本、图片、图形、音频、视频等）均受版权法和其他知识产权法律的保护，其版权归
+                    Share And Talk 及首页侧边栏两位开发者所有。
+
+                    2. 免责声明
+
+                    本网站上发布的所有内容均由用户自行上传发布，而非本网站所有。本网站对由用户发布的任何信息、文章、创意等不承担任何责任，这些文章的观点和立场仅代表作者本人，与本网站无关。
+
+                    用户在使用本网站时，不得发布任何涉及政治、色情、暴力、血腥等违法或违反道德的信息，如有违反，一切后果由用户自己承担，本网站不负任何责任。
+
+                    3. 法律适用
+
+                    本版权声明将受到中华人民共和国法律的管辖，并应按照该国家的法律进行解释。在任何情况下，本版权声明所产生的争议均应提交中华人民共和国有管辖权的法院进行解决。
+
+                    如您对本版权声明有任何疑问或意见，请通过网站底部"联系我们"按钮联系：
+
+                    感谢您使用 Share And Talk 网站！
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal end-->

@@ -1,0 +1,24 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block content %}
+    <link rel='stylesheet' id='kratos-style-css' href='{% static 'blog/css/share.css' %}?ver=2.5.2' type='text/css'
+          media='all'/>
+    <ul id="shareul">
+        <li><a href="#"><i class="bi bi-facebook"></i></i></a></li>
+        <li><a href="#"><i class="bi bi-twitter"></i></a></li>
+        <li><a href="#"><i class="bi bi-google"></i></i></a></li>
+        <li><a href="#"><i class="bi bi-wechat"></i></a></li>
+    </ul>
+    <div class="container" style="background-color:rgba(0,0,0,0);">
+        <div class="row">
+            <section id="main" class="col-md-8">
+                <h1>本页面暂未开发完成，敬请期待</h1>
+                <h3>您当前位于 {{ softCurrent.text }} <br><a href="/">点击返回首页</a></h3>
+                <div class="text-center" id="page-footer">
+                </div>
+            </section>
+            {% include 'blog/components/sidebar.html' %}
+        </div>
+    </div>
+    </div>
+{% endblock content %}

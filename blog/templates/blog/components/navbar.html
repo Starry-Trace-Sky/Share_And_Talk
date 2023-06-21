@@ -1,0 +1,138 @@
+{% load static %}
+<nav class="py-md-0 py-1 navbar navbar-expand-lg fixed-top navbar-dark"
+     style="background-color: rgba(52, 152, 219, 0.5);">
+    <div class="container-fluid">
+        <a class="navbar-brand fs-1 py-0 fw-bolder" href="{% url 'blog:index' %}" style="font-family:Cookie;">Skyler</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="nav navbar-nav text-white ms-auto">
+                <li class="nav-item dropdown dropdown-hover">
+                    <a class="nav-link dropdown-toggle" data-target="#" role="button" data-bs-toggle="dropdown"
+                       aria-expanded="false">
+                        一级分类
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu" style="background: rgba(40, 42, 44, .6);font-size: medium;">
+                        {% for topmeta in topMetas %}
+                            <li><a style="color: white;" class="dropdown-item"
+                                   href="{% url 'blog:metas_top' id=topmeta.id pageID=1 %}">{{ topmeta.text }}</a></li>
+                        {% endfor %}
+                    </ul>
+
+                <li class="nav-item dropdown dropdown-hover">
+                    <a class="nav-link dropdown-toggle" data-target="#" role="button" data-bs-toggle="dropdown"
+                       aria-expanded="false">
+                        二级分类
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu" style="background: rgba(40, 42, 44, .6);font-size: medium;">
+                        {% for secondmeta in secondMetas %}
+                            <li><a style="color: white;" class="dropdown-item"
+                                   href="{% url 'blog:metas_second' id=secondmeta.id pageID=1 %}">{{ secondmeta.text }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+
+                <li class="nav-item dropdown dropdown-hover">
+                    <a class="nav-link dropdown-toggle" data-target="#" role="button" data-bs-toggle="dropdown"
+                       aria-expanded="false">
+                        软件分类
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu" style="background: rgba(40, 42, 44, .6);font-size: medium;">
+                        {% for softmeta in softMetas %}
+                            <li><a style="color: white;" class="dropdown-item"
+                                   href="{% url 'blog:metas_software' id=softmeta.id pageID=1 %}">{{ softmeta.text }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                <style>
+                    @media (min-width: 991.98px) {
+                        .dropdown:hover .dropdown-menu {
+                            display: block;
+                            animation: slideDown .2s ease-in-out;
+                        }
+                    }
+
+                    @keyframes slideDown {
+                        0% {
+                            transform: translateY(-10px);
+                            opacity: 0;
+                        }
+                        100% {
+                            transform: translateY(0);
+                            opacity: 1;
+                        }
+                    }
+                </style>
+                {% if user.is_authenticated %}
+                    <style>
+                        .navbar-nav > li {
+                            margin-top: 5px;
+                        }
+
+                        #info-user .dropdown-item {
+                            color: #fff;
+                        }
+
+                    </style>
+                    <div class="nav-item dropdown" id="info-user">
+                        <a class="nav-link dropdown-toggle" href="javascript:" role="button" id="dropdownMenuLink"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="{{ user.avatar }}" alt="用户头像" class="user-avatar" style="border-radius: 50%;">
+                            <span class="user-nickname"><strong>{{ user.nickname }}</strong></span>
+                        </a>
+
+                        <ul class="dropdown-menu text-white" aria-labelledby="dropdownMenuLink"
+                            style="background: rgba(40, 42, 44, .6);">
+                            <li><a class="dropdown-item" href="{% url 'blog:new_article' %}">撰写新文章</a></li>
+                            <li><a class="dropdown-item" href="{% url 'blog:my_articles' %}">我的文章</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">用户中心</a></li>
+                            <li><a class="dropdown-item" href="javascript:" id="qqPhotoA">同步QQ头像</a></li>
+                            <li><a class="dropdown-item" href="javascript:" id="GravatarPhotoA">同步Gravatar头像</a>
+                            </li>
+                            <script>
+                                var a = document.getElementById('qqPhotoA');
+                                a.addEventListener('click', function (event) {
+                                    event.preventDefault();
+                                    var m = $('#qqPhotoModal');
+                                    m.modal('show');
+                                });
+                                var aa = document.getElementById('GravatarPhotoA');
+                                aa.addEventListener('click', function (event) {
+                                    event.preventDefault();
+                                    var mm = $('#GravatarPhotoModal');
+                                    mm.modal('show');
+                                });
+                            </script>
+                            {% if user.is_superuser == True %}
+                                <li><a class="dropdown-item" href="{% url 'api:backup' %}" id="bk">备份数据库</a></li>
+                            {% endif %}
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="{% url 'users:logout' %}?next=/">登出</a></li>
+                        </ul>
+                    </div>
+                {% else %}
+                    <li class="nav-item mt-1">
+                        <div class="btn-group btn-group-sm d-md-block" role="group" aria-label="Basic example" id="log">
+                            <a href="{% url 'users:login' %}" type="button"
+                               class="btn btn-outline-primary bg-opacity-75" style="color: white;">Login</a>
+                            <a href="{% url 'users:register' %}" type="button" class="btn btn-primary bg-opacity-75">Sign-up</a>
+                        </div>
+                    </li>
+                {% endif %}
+            </ul>
+
+        </div>
+    </div>
+</nav>

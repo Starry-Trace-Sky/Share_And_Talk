@@ -1,0 +1,271 @@
+{% extends 'blog/article/article_base.html' %}
+{% load static %}
+{% block content %}
+<!-- 引入 KaTeX 样式表 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.css"
+      integrity="sha384-3UiQGuEI4TTMaFmGIZumfRPtfKQ3trwQE2JgosJxCnGmQpL/lJdjpcHkaaFwHlcI" crossorigin="anonymous">
+<script>
+    window.addEventListener('load', getCode)
+
+    function getCode() {
+        var pre = document.getElementsByClassName('codehilite')
+        var pre_num = pre.length
+        for (let i = 0; i < pre_num; i++) {
+            pre[i].classList.add('pre' + i)
+            pre[i].classList.add('position-relative')
+            let copy_btn = document.createElement('button')
+            copy_btn.className = 'btn' + i
+            copy_btn.innerHTML = '<i class="bi bi-clipboard-heart-fill"></i>'
+            copy_btn.style.zIndex = '1'
+            copy_btn.classList.add('btn-light', 'btn', 'position-absolute', 'end-0')
+            copy_btn.setAttribute('data-clipboard-action', 'copy')
+            copy_btn.setAttribute('data-clipboard-target', '.pre' + i + ' code')
+            pre[i].insertAdjacentElement('afterBegin', copy_btn)
+        }
+
+        var clipboard = new ClipboardJS('pre.codehilite button');
+
+        clipboard.on('success', function () {
+            $(document).ready(function () {
+                var $toast = $('#toastCopy');
+                $toast.toast({
+                    delay: 10000
+                });
+                $toast.toast('show');
+
+                setTimeout(function () {
+                    $toast.toast('hide');
+                }, 5000);
+
+            })
+        })
+
+    }
+</script>
+
+<!-- 加载 KaTeX 的脚本，使用 defer 属性延迟加载以加快页面渲染 -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.js"
+        integrity="sha384-G0zcxDFp5LWZtDuRMnBkk3EphCK1lhEf4UEyEM693ka574TZGwo4IWwS6QLzM/2t"
+        crossorigin="anonymous"></script>
+
+<!-- 要自动渲染文本元素中的数学公式，请包含 auto-render 扩展脚本 -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/contrib/auto-render.min.js"
+        integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.3.0/raphael.min.js"></script>
+<script src="http://flowchart.js.org/flowchart-latest.js"></script>
+<link rel='stylesheet' id='kratos-style-css' href='{% static 'blog/css/share.css' %}?ver=2.5.2' type='text/css'
+      media='all'/>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+<div class="container">
+    <div class="row g-3">
+        <section id="main" class="col-md-8" style="background-color:rgba(245,245,245,0.4);">
+            <style>
+                .arti img {
+                    max-width: 100%;
+                    max-height: 100%;
+                    display: block;
+                    margin: auto;
+                }
+            </style>
+            {% if users %}
+                <div class="btn-group my-2" role="group" aria-label="Basic mixed styles example">
+                    <button type="button" class="btn btn-success btn-primary mx-1 rounded-left"
+                            onclick="window.location.href='{% url "blog:edit_article" id=passage.id %}'">编辑文章
+                    </button>
+                    <button type="button" class="btn btn-danger btn-primary mx-1 rounded-right" data-bs-toggle="modal"
+                            data-bs-target="#delModal">删除文章
+                    </button>
+                </div>
+                <script>
+                    function dell() {
+                        window.location.href = "{% url 'blog:delete_article' id=passage.id %}"
+                    }
+                </script>
+            {% endif %}
+            <div id="dia">
+                <article class="arti markdown-body">
+                    {% autoescape off %}
+                    {{ text }}
+                    {% endautoescape %}
+                </article>
+                {% if login %}
+                    <div class="d-flex justify-content-center gap-1">
+                        <button type="button" id="like-btn" class="btn rounded-pill like-btn"
+                                style="border:1px solid #ff8acc;color:#ff8acc;isolation:isolate">
+                            {% if not like %}
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                     class="bi bi-heart" viewBox="0 0 16 16">
+                                    <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+                                </svg>     {{ passage.likes.count }}
+                            {% else %}
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red"
+                                     class="bi bi-heart-fill" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                          d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                                </svg>     {{ passage.likes.count }}
+                            {% endif %}
+                        </button>
+
+                        <div class="share-area">
+                            <button class="btn rounded-pill"
+                                    style="border:1px solid #ff8acc;color:#ff8acc;isolation:isolate">Share
+                            </button>
+                            <div class="share-content">
+                                <ul class="d-flex">
+                                    <li>
+                                        <a href="javascript:;" id="facebook-link">
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="50"
+                                                 viewBox="126.445 2.281 589 589" width="50">
+                                                <circle cx="420.945" cy="296.781" fill="#3c5a9a" r="294.5"/>
+                                                <path d="m516.704 92.677h-65.239c-38.715 0-81.777 16.283-81.777 72.402.189 19.554 0 38.281 0 59.357h-44.788v71.271h46.174v205.177h84.847v-206.531h56.002l5.067-70.117h-62.531s.14-31.191 0-40.249c0-22.177 23.076-20.907 24.464-20.907 10.981 0 32.332.032 37.813 0v-70.403z"
+                                                      fill="#fff"/>
+                                            </svg>
+                                        </a>
+                                        <span>Facebook</span>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:;" id="wechat-link">
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="50" width="62"
+                                                 viewBox="0 0 111.36600000000001 90">
+                                                <linearGradient id="a" x1="50.056%" x2="50.056%" y1="94.15%" y2=".437%">
+                                                    <stop offset="0" stop-color="#05cd66"/>
+                                                    <stop offset="1" stop-color="#61f380"/>
+                                                    <stop offset="1" stop-color="#9eee69"/>
+                                                </linearGradient>
+                                                <linearGradient id="b" x1="50.089%" x2="50.089%" y1="93.535%"
+                                                                y2="-.036%">
+                                                    <stop offset="0" stop-color="#e4e6e6"/>
+                                                    <stop offset="1" stop-color="#f0f0f0"/>
+                                                </linearGradient>
+                                                <g fill="none" fill-rule="evenodd">
+                                                    <path d="M0 33.466c0 10.04 5.474 19.213 13.933 25.286.746.496 1.12 1.24 1.12 2.231 0 .248-.125.62-.125.868-.622 2.479-1.742 6.57-1.866 6.693-.124.372-.249.62-.249.992 0 .744.622 1.363 1.369 1.363.248 0 .497-.124.746-.248l8.832-5.082c.622-.371 1.369-.62 2.115-.62.374 0 .871 0 1.244.125 4.106 1.24 8.584 1.859 13.187 1.859 22.267 0 40.306-14.998 40.306-33.467S62.573 0 40.306 0C18.038 0 0 14.998 0 33.466"
+                                                          fill="url(#a)"/>
+                                                    <path d="M77.86 86.628c3.847 0 7.57-.5 10.92-1.498.249-.125.621-.125.993-.125.62 0 1.241.25 1.738.5l7.322 4.245c.248.125.372.25.62.25.62 0 1.117-.5 1.117-1.124 0-.25-.124-.5-.124-.874 0-.125-.993-3.497-1.49-5.62-.123-.25-.123-.5-.123-.749 0-.75.372-1.374.993-1.873 7.073-5.12 11.54-12.738 11.54-21.23 0-15.485-15.015-28.098-33.506-28.098S44.353 42.92 44.353 58.53c0 15.485 15.016 28.098 33.507 28.098z"
+                                                          fill="url(#b)"/>
+                                                    <path d="M32.05 22.662c0 2.891-2.288 5.18-5.18 5.18s-5.18-2.289-5.18-5.18 2.29-5.18 5.18-5.18 5.18 2.289 5.18 5.18M58.92 22.662c0 2.891-2.288 5.18-5.179 5.18s-5.18-2.289-5.18-5.18 2.289-5.18 5.18-5.18 5.18 2.289 5.18 5.18"
+                                                          fill="#168743"/>
+                                                    <g fill="#919191">
+                                                        <path d="M84.82 49.856c0 2.518 2.015 4.532 4.533 4.532s4.532-2.014 4.532-4.532-2.014-4.532-4.532-4.532-4.533 2.014-4.533 4.532M62.482 49.856c0 2.518 2.014 4.532 4.532 4.532s4.533-2.014 4.533-4.532-2.015-4.532-4.533-4.532-4.532 2.014-4.532 4.532"/>
+                                                    </g>
+                                                </g>
+                                            </svg>
+                                        </a>
+                                        <span> WeChat</span>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:;" id="qq-link">
+                                            <svg height="50" viewBox="-1.94 0 124.879 145.085" width="50"
+                                                 xmlns="http://www.w3.org/2000/svg">
+                                                <path d="m60.503 142.237c-12.533 0-24.038-4.195-31.445-10.46-3.762 1.124-8.574 2.932-11.61 5.175-2.6 1.918-2.275 3.874-1.807 4.663 2.056 3.47 35.273 2.216 44.862 1.136zm0 0c12.535 0 24.039-4.195 31.447-10.46 3.76 1.124 8.573 2.932 11.61 5.175 2.598 1.918 2.274 3.874 1.805 4.663-2.056 3.47-35.272 2.216-44.862 1.136zm0 0"
+                                                      fill="#faab07"/>
+                                                <path d="m60.576 67.119c20.698-.14 37.286-4.147 42.907-5.683 1.34-.367 2.056-1.024 2.056-1.024.005-.189.085-3.37.085-5.01 0-27.634-13.044-55.401-45.124-55.402-32.08.001-45.125 27.769-45.125 55.401 0 1.642.08 4.822.086 5.01 0 0 .583.615 1.65.913 5.19 1.444 22.09 5.65 43.312 5.795zm56.245 23.02c-1.283-4.129-3.034-8.944-4.808-13.568 0 0-1.02-.126-1.537.023-15.913 4.623-35.202 7.57-49.9 7.392h-.153c-14.616.175-33.774-2.737-49.634-7.315-.606-.175-1.802-.1-1.802-.1-1.774 4.624-3.525 9.44-4.808 13.568-6.119 19.69-4.136 27.838-2.627 28.02 3.239.392 12.606-14.821 12.606-14.821 0 15.459 13.957 39.195 45.918 39.413h.848c31.96-.218 45.917-23.954 45.917-39.413 0 0 9.368 15.213 12.607 14.822 1.508-.183 3.491-8.332-2.627-28.021"/>
+                                                <path d="m49.085 40.824c-4.352.197-8.07-4.76-8.304-11.063-.236-6.305 3.098-11.576 7.45-11.773 4.347-.195 8.064 4.76 8.3 11.065.238 6.306-3.097 11.577-7.446 11.771m31.133-11.063c-.233 6.302-3.951 11.26-8.303 11.063-4.35-.195-7.684-5.465-7.446-11.77.236-6.305 3.952-11.26 8.3-11.066 4.352.197 7.686 5.468 7.449 11.773"
+                                                      fill="#fff"/>
+                                                <path d="m87.952 49.725c-1.162-2.575-12.875-5.445-27.374-5.445h-.156c-14.5 0-26.212 2.87-27.375 5.446a.863.863 0 0 0 -.085.367c0 .186.063.352.16.496.98 1.427 13.985 8.487 27.3 8.487h.156c13.314 0 26.319-7.058 27.299-8.487a.873.873 0 0 0 .16-.498.856.856 0 0 0 -.085-.365"
+                                                      fill="#faab07"/>
+                                                <path d="m54.434 29.854c.199 2.49-1.167 4.702-3.046 4.943-1.883.242-3.568-1.58-3.768-4.07-.197-2.492 1.167-4.704 3.043-4.944 1.886-.244 3.574 1.58 3.771 4.07m11.956.833c.385-.689 3.004-4.312 8.427-2.993 1.425.347 2.084.857 2.223 1.057.205.296.262.718.053 1.286-.412 1.126-1.263 1.095-1.734.875-.305-.142-4.082-2.66-7.562 1.097-.24.257-.668.346-1.073.04-.407-.308-.574-.93-.334-1.362"/>
+                                                <path d="m60.576 83.08h-.153c-9.996.12-22.116-1.204-33.854-3.518-1.004 5.818-1.61 13.132-1.09 21.853 1.316 22.043 14.407 35.9 34.614 36.1h.82c20.208-.2 33.298-14.057 34.616-36.1.52-8.723-.087-16.035-1.092-21.854-11.739 2.315-23.862 3.64-33.86 3.518"
+                                                      fill="#fff"/>
+                                                <g fill="#eb1923">
+                                                    <path d="m32.102 81.235v21.693s9.937 2.004 19.893.616v-20.009c-6.307-.357-13.109-1.152-19.893-2.3"/>
+                                                    <path d="m105.539 60.412s-19.33 6.102-44.963 6.275h-.153c-25.591-.172-44.896-6.255-44.962-6.275l-6.474 16.158c16.193 4.882 36.261 8.028 51.436 7.845h.153c15.175.183 35.242-2.963 51.437-7.845zm0 0"/>
+                                                </g>
+                                            </svg>
+                                        </a>
+                                        <span>QQ</span>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:;" id="youtube-link">
+                                            <svg height="50" viewBox="0 .03 2498 2502.47" width="48"
+                                                 xmlns="http://www.w3.org/2000/svg">
+                                                <path d="m0 1864.11v.11c1.5 55.5 2 111.32 11.32 166.47 9.92 58.35 24.1 115.25 51.15 168.21q54.86 107.52 150.21 181.66c45.52 35.5 95.25 63.69 150.3 81.47 80.26 25.89 163.07 35.81 247.09 36.3 52.42.33 104.81 1.64 157.25 1.42 380.82-1.6 761.65 2.75 1142.49-2.35 50.53-.68 100.24-6.85 149.84-15.92 95.06-17.4 179.07-58 250.95-122.09 83.77-74.71 140.29-166.16 165.81-276.52 16.69-72.14 20.87-145.32 21.58-218.77v-14.65c0-5.68-2.16-1247.91-2.36-1264.33-.55-45.1-3.88-89.87-12.33-134.25-10.29-54.08-24.82-106.78-50.71-155.7-27.35-51.7-61.6-98.17-104-138.79-64.89-62.23-139.78-106.23-227-129.51-78.74-21-159.07-25.68-240-25.6a2.45 2.45 0 0 1 -.45-1.24h-1224.74c0 .42 0 .83-.07 1.24-45.93.84-91.92.49-137.61 6.16-50.05 6.22-99.63 15.59-147 33.09-74.62 27.6-139.46 70.59-194.84 128-62.75 65-107 140.22-130.44 227.79-20.95 78.13-25.51 157.81-25.62 238.06"
+                                                      fill="#fff"/>
+                                                <path d="m0 .79h2498v2498h-2498z" fill="none"/>
+                                                <path d="m1293.24 1938.65-409.54-7.49c-132.6-2.61-265.53 2.6-395.53-24.44-197.76-40.4-211.77-238.49-226.43-404.65-20.2-233.6-12.38-471.44 25.74-703.09 21.52-129.98 106.21-207.54 237.18-215.98 442.12-30.63 887.18-27 1328.32-12.71 46.59 1.31 93.5 8.47 139.44 16.62 226.77 39.75 232.3 264.23 247 453.2 14.66 190.92 8.47 382.82-19.55 572.44-22.48 157-65.49 288.66-247 301.37-227.42 16.62-449.62 30-677.68 25.74.01-1.01-1.3-1.01-1.95-1.01zm-240.77-397.48c171.38-98.4 339.49-195.16 509.89-292.9-171.7-98.4-339.49-195.16-509.89-292.9z"
+                                                      fill="#f00"/>
+                                            </svg>
+                                        </a>
+                                        <span>YouTube</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <script>
+                        $(document).ready(function () {
+                            $("#like-btn").click(function () {
+                                // 发送 POST 请求
+                                $.ajax({
+                                    url: "{% url 'api:like' %}",
+                                    method: "POST",
+                                    headers: {'X-CSRFTOKEN': '{{ csrf_token }}'},
+                                    data: {
+                                        article_id: "{{ passage.id }}"
+                                    },
+                                    success: function (response) {
+                                        // 成功处理回调函数
+                                        if (response == 'like ok') {
+                                            var likesCount = parseInt($('#like-btn').text().trim());
+                                            $('#like-btn').html('<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-heart-fill" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/></svg>     ' + (likesCount + 1));
+                                        }
+                                        if (response == 'dislike ok') {
+                                            var likesCount = parseInt($('#like-btn').text().trim());
+                                            $('#like-btn').html('<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16"><path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/></svg>  ' + (likesCount - 1));
+                                        }
+                                    }
+                                });
+                            });
+                        });
+                    </script>
+                {% endif %}
+            </div>
+
+
+            <div class="text-center" id="page-footer">
+            </div>
+        </section>
+        {% include 'blog/components/sidebar.html' %}
+    </div>
+</div>
+</div>
+<link rel="stylesheet" href="{% static 'blog/js/highlight/styles/github-dark-dimmed.min.css' %}">
+<script type="text/javascript" src="{% static 'blog/js/highlight/highlight.min.js' %}"></script>
+<script>hljs.highlightAll();</script>
+<style>
+    .twemo {
+        display: inline-block !important;
+        vertical-align: middle;
+    }
+</style>
+
+<script>
+    // 获取所有具有'class'属性且值为'language-flow'的<code>元素
+    const codeElements = document.querySelectorAll('code.language-flow');
+
+    // 遍历所有<code>元素并进行处理
+    codeElements.forEach((element, index) => {
+        // 创建一个新的<div>元素作为父节点
+        const divElement = document.createElement('div');
+
+        // 为<div>元素设置id，例如 "dia-1", "dia-2"，依次递增
+        divElement.id = `dia-${index + 1}`;
+
+        // 将<div>元素插入到<code>元素的前面作为父节点
+        element.parentNode.insertBefore(divElement, element);
+
+        // 使用flowchart.parse解析<code>元素的文本内容
+        const flowchartCode = element.textContent;
+        const flowchartt = flowchart.parse(flowchartCode);
+
+        // 使用drawSVG方法绘制Flowchart，并将其插入到对应的<div>元素中
+        flowchartt.drawSVG(`dia-${index + 1}`);
+
+        // 清空<code>元素的内容
+        element.innerHTML = '';
+    });
+</script>
+<script src="{% static 'blog/js/showToast.js' %}"></script>
+{% endblock content %}

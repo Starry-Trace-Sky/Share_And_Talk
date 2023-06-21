@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+        <title>Share And Talk</title>
+    </head>
+
+    <body>
+        <h4>{{ content }}</h4>
+    </body>
+</html>
+
+<script>
+    $(function() {
+        setTimeout(function () {
+            window.location.href = "{% url 'blog:index' %}";
+        }, 1500);
+    })
+</script>

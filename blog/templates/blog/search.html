@@ -1,0 +1,116 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block content %}
+    <link rel='stylesheet' id='kratos-style-css' href='{% static 'blog/css/share.css' %}?ver=2.5.2' type='text/css'
+          media='all'/>
+    <ul id="shareul">
+        <li><a href="javascript:"><i class="bi bi-facebook"></i></a></li>
+        <li><a href="javascript:"><i class="bi bi-twitter"></i></a></li>
+        <li><a href="javascript:"><i class="bi bi-google"></i></a></li>
+        <li><a href="javascript:"><i class="bi bi-wechat"></i></a></li>
+    </ul>
+    <div class="container" style="background-color:rgba(0,0,0,0);">
+        <div class="row">
+            <section id="main" class="col-md-8">
+                {% for article in articles %}
+                    <article class="card mb-3 p-3">
+                        <div class="row g-3">
+
+
+                            <!--加图模式开始-->
+                            <div class='col-lg-4'>
+                                <a href="{% url 'blog:article' id=article.id year=article.pub_date.year month=article.pub_date.month day=article.pub_date.day %}">
+                                    <img class='img-thumbnail rounded-start' src='{{ article.getFirstImage }}'/>
+                                </a>
+                            </div>
+                            <!--加图模式结束-->
+
+                            <style>
+                                .card-content {
+                                    height: 80px;
+                                    overflow: hidden;
+                                    text-overflow: ellipsis;
+                                    font-size: 16px;
+                                    line-height: 1.8;
+                                }
+
+                                @media (min-width: 991.98px) {
+                                    article div.col-lg-4 {
+                                        height: 140px;
+                                    }
+                                }
+
+
+                                article div.row div.col-lg-4 img.img-thumbnail {
+                                    height: 100%;
+                                    width: 100%;
+                                }
+                            </style>
+
+
+                            <div class="col-lg-8">
+
+                                <div class="fw-light">
+                                    <header class="kratos-entry-header-new">
+                                        <!--二级分类-->
+                                        <span class="badge rounded-pill bg-primary pull-right"
+                                              style="margin-right: 3px;">{{ article.meta_second.text }}</span>
+                                        <!--一级分类-->
+                                        <span class="badge rounded-pill bg-primary pull-right"
+                                              style="margin-right: 3px;">{{ article.meta_top.text }}</span>
+                                        <span class="h5 card-title"><a class="link-dark text-decoration-none sign"
+                                                                       href="{% url 'blog:article' id=article.id year=article.pub_date.year month=article.pub_date.month day=article.pub_date.day %}">{{ article.title }}</a></span>
+                                    </header>
+                                    <div class="card-content">
+                                        <p>{{ article.getBrief }}</p>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div style="font-size:12px" class="mt-1">
+            <span class="visible-lg visible-md visible-sm pull-left">
+            <a class="text-decoration-none link-secondary" href="javascript:"><i class="bi bi-calendar-heart-fill"></i>发布日期 {{ article.pub_date }}</a>
+            <a class="text-decoration-none link-secondary" href="javascript:"><i class="bi bi-calendar-heart-fill"></i>修改日期 {{ article.modify_date }}</a>
+            </span>
+                                <span class="pull-left">
+            <a class="text-decoration-none link-secondary" href="javascript:"><i
+                    class="bi bi-eye-fill"></i> {{ article.read_times }} 次阅读</a>
+            <a class="text-decoration-none link-secondary" href="javascript:"><i
+                    class="bi bi-person-fill"></i>{{ article.author.nickname }}</a>
+            </span>
+                                <span class="pull-right">
+            <a class="link-secondary text-decoration-none"
+               href="{% url 'blog:article' id=article.id year=article.pub_date.year month=article.pub_date.month day=article.pub_date.day %}">阅读全文 <i
+                    class="bi bi-arrow-up-left-circle-fill"></i></a>
+            </span>
+                            </div>
+
+                        </div>
+                    </article>
+                    {% empty %}
+                    <h3>这里什么都没有<a href="{% url 'blog:new_article' %}">点击此处新建文章</a></h3>
+                {% endfor %}
+
+                <div class="text-center" id="page-footer">
+                </div>
+            </section>
+            {% include 'blog/components/sidebar.html' %}
+        </div>
+    </div>
+    </div>
+    <!--特定关键字标红-->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"
+            integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+    <script type="text/javascript" language="javascript">
+        $(document).ready(function () {
+            var str, newstr;
+            var eles = document.getElementsByClassName('sign');
+            var s = "{{ keyWords }}";
+            var reg = new RegExp("(" + s + ")", "g");
+            for (let i = 0; i < eles.length; i++) {
+                eles[i].innerHTML = eles[i].innerHTML.replace(reg, "<font color=red>$1</font>");
+            }
+        });
+    </script>
+{% endblock content %}

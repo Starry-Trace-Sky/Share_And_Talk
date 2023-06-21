@@ -1,0 +1,58 @@
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center gap-2">
+        {% if articles.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ articles.previous_page_number }}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+        {% else %}
+            <li class="page-item disabled">
+                <a class="page-link" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+        {% endif %}
+
+        {% if articles.number > 5 %}
+            <li class="page-item disabled"><a class="page-link" href="#">···</a></li>
+        {% endif %}
+
+        {% for i in articles.paginator.page_range %}
+            {% if i > articles.number|add:'-3' and i < articles.number|add:'3' %}
+                {% if i == articles.number %}
+                    <li class="page-item active"><a class="page-link" href="#">{{ i }}</a></li>
+                {% else %}
+                    <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                {% endif %}
+            {% endif %}
+            {% empty %}
+            <li class="page-item disabled"><a class="page-link" href="#">1</a></li>
+        {% endfor %}
+
+        {% if articles.paginator.num_pages > articles.number|add:'4' %}
+            <li class="page-item disabled"><a class="page-link" href="#">···</a></li>
+        {% endif %}
+
+        {% if articles.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ articles.next_page_number }}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        {% else %}
+            <li class="page-item disabled">
+                <a class="page-link" href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        {% endif %}
+    </ul>
+</nav>
+<style>
+    ul.pagination li.page-item a.page-link {
+        border-radius: 50%;
+        width: 48px;
+        height: 48px;
+    }
+</style>

@@ -1,0 +1,256 @@
+{% load static %}
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>{{ title }}</title>
+    <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+    <style>
+        .darkmode-toggle {
+            z-index: 90;
+        }
+
+        .darkmode-layer {
+            z-index: 0;
+        }
+    </style>
+    <script>
+        const date = new Date(); // 创建日期对象
+        const hour = date.getHours(); // 获取当前小时数
+        const options = {
+            bottom: '90px',
+            right: '35px',
+            label: '🌓'
+        }
+
+        function addDarkmodeWidget() {
+            var darkmd = new Darkmode(options);
+            darkmd.showWidget();
+        }
+
+        window.addEventListener('load', addDarkmodeWidget);
+    </script>
+    <link rel="manifest" href="{% static 'blog/manifest.json' %}">
+    <link rel="icon" href="{% static 'blog/images/image/favicon.ico' %}">
+    <link rel="apple-touch-icon" href="{% static 'blog/images/image/favicon.ico' %}">
+    <link rel="stylesheet" href="{% static 'blog/css/contactTxt.css' %}">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"
+            integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel='stylesheet' id='kratos-style-css' href='{% static 'blog/css/lantern.css' %}?ver=2.5.2' type='text/css'
+          media='all'/>
+    <link rel='stylesheet' href='{% static 'blog/css/font.css' %}'/>
+    <style>
+        .waves {
+            position: relative;
+            width: 100%;
+            margin-bottom: -7px;
+            max-height: 150px;
+        }
+
+        .parallax > use {
+            animation: move-forever 25s cubic-bezier(.55, .5, .45, .5) infinite;
+        }
+
+        .parallax > use:nth-child(1) {
+            /* 延迟2秒启动动画  */
+            animation-delay: -2s;
+            /* 设置动画持续时间为7秒 */
+            animation-duration: 7s;
+        }
+
+        .parallax > use:nth-child(2) {
+            animation-delay: -3s;
+            animation-duration: 10s;
+        }
+
+        .parallax > use:nth-child(3) {
+            animation-delay: -4s;
+            animation-duration: 13s;
+        }
+
+        .parallax > use:nth-child(4) {
+            animation-delay: -5s;
+            animation-duration: 20s;
+        }
+
+        @keyframes move-forever {
+            0% {
+                transform: translate3d(-90px, 0, 0);
+            }
+
+            100% {
+                transform: translate3d(85px, 0, 0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .waves {
+                height: 40px;
+                min-height: 40px;
+            }
+        }
+
+        .wavesdiv {
+            background: #e1dfdd;
+        }
+
+        @font-face {
+            font-family: Cookie;
+            src: url('{% static 'blog/font/Cookie/Cookie-Regular.ttf' %}');
+        }
+
+        @font-face {
+            font-family: "FenYuan";
+            src: url("{% static 'blog/font/jf-openhuninn-2.0.ttf' %}");
+        }
+
+        .carousel-item {
+            height: 300px;
+        }
+
+        .item1 {
+            background-image: url({% static 'blog/images/image/head.png' %});
+            background-position: center center;
+            background-size: cover;
+        }
+
+        .item2 {
+            background-image: url({% static 'blog/images/image/head2.jpg' %});
+            background-position: center center;
+            background-size: cover;
+        }
+
+        .item3 {
+            background-image: url({% static 'blog/images/image/head3.jpg' %});
+            background-position: center bottom;
+            background-size: cover;
+        }
+
+
+        footer > div {
+            background-color: #fff;
+        }
+
+        footer div.footer-about a {
+            width: 120px;
+        }
+
+        footer div.canva-img img {
+            height: 133px;
+        }
+    </style>
+
+</head>
+<body>
+<div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+
+
+            <header id="kratos-header-section">
+                <!-- 导航栏开始 -->
+                {% include 'blog/components/navbar.html' %}
+
+                <!-- 进度条 -->
+                <div class="read_pro progress w-100 position-fixed" id="progress"
+                     style="height: 4px;top:55px;z-index:90;background-color: transparent;">
+                    <div class="read_pro_inner progress-bar progress-bar-striped progress-bar-animated"
+                         id="read_pro_inner"></div>
+                </div>
+                {% comment %} 弹窗提示框开始 {% endcomment %}
+                <script type="text/javascript" src="{% static 'blog/js/showToast.js' %}"></script>
+
+                {% comment %} 分享弹窗提示框开始 {% endcomment %}
+                <div id="toastShare" class="toast fade in" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header">
+                        <img src="{% static 'blog/images/check.png' %}" class="rounded me-2" alt="绿色对勾">
+                        <strong class="me-auto">Share And Talk</strong>
+                        <small>刚刚</small>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">
+                        网址已复制到剪切板！快快去分享吧😄
+                    </div>
+                </div>
+                {% comment %} 分享弹窗提示框结束 {% endcomment %}
+                {% comment %} 代码复制提示框开始 {% endcomment %}
+                <div id="toastCopy" class="toast fade in" role="alert" aria-live="assertive" aria-atomic="true"
+                     style="isolation:isolate;">
+                    <div class="toast-header">
+                        <img src="{% static 'blog/images/check.png' %}" class="rounded me-2" alt="绿色对勾">
+                        <strong class="me-auto">Share And Talk</strong>
+                        <small>刚刚</small>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">
+                        代码已复制到剪切板！快快去分享吧😄
+                    </div>
+                </div>
+                {% comment %} 代码复制提示框结束 {% endcomment %}
+                <link rel="stylesheet" href="{% static 'blog/css/toastt.css' %}"/>
+                {% include 'blog/components/toast.html' %}
+                {% comment %} 弹窗提示框结束 {% endcomment %}
+
+                {% comment %} modal start {% endcomment %}
+                {% include 'blog/components/modal.html' %}
+                {% comment %} modal end {% endcomment %}
+
+                <!-- 导航栏结束 -->
+                <div id="carouselExampleCaptions" class="carousel slide">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0"
+                                class="active"
+                                aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                                aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                                aria-label="Slide 3"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active item1">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5 class="text-danger"><span class="h1">☭</span>富强 民主 文明 和谐</h5>
+                                <p>Some representative placeholder content for the first slide.</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item item2">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5 class="text-danger"><span class="h1">☭</span>自由 平等 公正 法治</h5>
+                                <p>Some representative placeholder content for the second slide.</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item item3">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5 class="text-danger"><span class="h1">☭</span>爱国 敬业 诚信 友善</h5>
+                                <p>Some representative placeholder content for the third slide.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+                            data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+                            data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </header>
+
+
+        </div>
+
+        <div class="pt-5" style="background-color:rgba(0,0,0,0)"><!--header-->
+
+            {% block content %}{% endblock content %}
+
+            <!--footer尾部-->
+{% include 'blog/base_footer.html' %}

@@ -1,0 +1,86 @@
+{% load static %}
+{% if sign == 'createSuccess' %}
+    <div id="toastt" class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="isolution:isolute;">
+        <div class="toast-header">
+            <img src="{% static 'blog/images/check.png' %}" class="rounded me-2" alt="绿色对勾">
+            <strong class="me-auto">Share And Talk</strong>
+            <small>刚刚</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            创建文章成功😄，新的开始总是充满无限可能😊
+        </div>
+    </div>
+{% elif sign == 'editSuccess' %}
+    <div id="toastt" class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="isolution:isolute;">
+        <div class="toast-header">
+            <img src="{% static 'blog/images/check.png' %}" class="rounded me-2" alt="绿色对勾">
+            <strong class="me-auto">Share And Talk</strong>
+            <small>刚刚</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            编辑文章成功😄，变化总是让人眼前一亮😇
+        </div>
+    </div>
+{% elif sign == 'deleteSuccess' %}
+    <div id="toastt" class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="isolution:isolute;">
+        <div class="toast-header">
+            <img src="{% static 'blog/images/check.png' %}" class="rounded me-2" alt="绿色对勾">
+            <strong class="me-auto">Share And Talk</strong>
+            <small>刚刚</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            删除文章成功😢，消失的文章最后悄悄向你说了声后会有期😊
+        </div>
+    </div>
+{% elif sign == 'loginSuccess' %}
+    <div id="toastt" class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="isolution:isolute;">
+        <div class="toast-header">
+            <img src="{% static 'blog/images/check.png' %}" class="rounded me-2" alt="绿色对勾">
+            <strong class="me-auto">Share And Talk</strong>
+            <small>刚刚</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            欢迎回来，{{ user.nickname }}😄，让我们继续记录学习，工作和生活吧😊
+        </div>
+    </div>
+{% elif sign == 'registerSuccess' %}
+    <div id="toastt" class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="isolution:isolute;">
+        <div class="toast-header">
+            <img src="{% static 'blog/images/check.png' %}" class="rounded me-2" alt="绿色对勾">
+            <strong class="me-auto">Share And Talk</strong>
+            <small>刚刚</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            欢迎加入我们，{{ user.nickname }}😄，让我们一起记录学习，工作和生活，探索新世界吧😊
+        </div>
+    </div>
+{% elif sign == 'sendEmailSuccess' %}
+    <div id="toastt" class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="isolution:isolute;">
+        <div class="toast-header">
+            <img src="{% static 'blog/images/check.png' %}" class="rounded me-2" alt="绿色对勾">
+            <strong class="me-auto">Share And Talk</strong>
+            <small>刚刚</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            发送反馈成功😄，感谢您提出对于本网站的建议，网站管理员会在时间充足的情况下回复😊
+        </div>
+    </div>
+{% elif sign == 'sendEmailFailed' %}
+    <div id="toastt" class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="isolution:isolute;">
+        <div class="toast-header">
+            <img src="{% static 'blog/images/check.png' %}" class="rounded me-2" alt="绿色对勾">
+            <strong class="me-auto">Share And Talk</strong>
+            <small>刚刚</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            发送反馈失败😢，请稍后重试😊
+        </div>
+    </div>
+{% endif %}

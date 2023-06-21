@@ -1,0 +1,82 @@
+{% extends 'blog/markdown/base_markdown.html' %}
+{% load static %}
+
+{% block content %}
+    <br>
+    <h3>编辑您的文章 <a href="{% url 'blog:index' %}">点击此处返回首页</a></h3>
+    <form method="post" action="{% url 'blog:new_article' %}">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-sm-4">
+                <input class="form-control" required type="text" minlength="1" maxlength="79" size="16" name="title"
+                       placeholder="请输入文章标题"
+                       style="width:90%;">
+            </div>
+            <div class="col-sm-3">
+                <select name="meta_top" class="form-select">
+                    {% for topMeta in topMetas %}
+                        <option value="{{ topMeta.id }}">{{ topMeta.text }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-sm-3">
+                <select name="meta_second" class="form-select">
+                    {% for secondMeta in secondMetas %}
+                        <option value="{{ secondMeta.id }}">{{ secondMeta.text }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-check form-switch col-sm-2">
+                <input class="form-check-input" name="pb" type="checkbox" role="switch" id="pb" checked>
+                <label class="form-check-label" for="flexSwitchCheckChecked">是否公开</label>
+                <button type="submit" class="btn btn-primary">发布文章</button>
+            </div>
+        </div>
+        <p>
+            <style type="text/css">
+                .wmd-wrapper ul {
+                    margin-left: 0px !important;
+                }
+
+                .wmd-wrapper ul li {
+                    list-style: disc !important;
+                }
+
+                .wmd-wrapper ul ul li {
+                    list-style: circle !important;
+                }
+
+                .wmd-wrapper h1,
+                .wmd-wrapper h2,
+                .wmd-wrapper h3,
+                .wmd-wrapper h4,
+                .wmd-wrapper h5,
+                .wmd-wrapper h6 {
+                    background: #ffffff !important;
+                    color: #000000 !important;
+                }
+
+                .wmd-wrapper h2,
+                .wmd-wrapper h3,
+                .wmd-wrapper h4 {
+                    padding: 0px !important;
+                }
+
+                .wmd-wrapper h5 {
+                    letter-spacing: 0px !important;
+                    text-transform: none !important;
+                    font-size: 1em !important;
+                }
+
+                .wmd-wrapper h6 {
+                    font-size: 1em !important;
+                    color: #777 !important;
+                }
+            </style>
+
+        <div id="editor">
+            <textarea name="text" required></textarea>
+        </div>
+        </p>
+    </form>
+{% endblock content %}
