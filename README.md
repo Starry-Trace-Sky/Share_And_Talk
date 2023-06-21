@@ -24,6 +24,12 @@
 
 ## 安装配置🍔
 
+安装依赖
+
+```bash
+pip install -r requirements.txt
+```
+
 ### 1.配置数据库
 
 打开`ShareAndTalk/settings.py`，找到如下代码
