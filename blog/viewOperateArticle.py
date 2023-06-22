@@ -32,9 +32,10 @@ def newArticle(request):
             datte = new_article.pub_date
             # 设置提示框需要的cookie
             req = redirect('blog:article', year=datte.year, month=datte.month,
-                           day=datte.day, id=new_article.id)
+                           day=datte.day, title=new_article.title)
             sign = 'createSuccess'
-            req.set_signed_cookie('sign', sign, max_age=60, salt=settings.SECRET_KEY)
+            req.set_signed_cookie('sign', sign, max_age=60,
+                                  salt=settings.SECRET_KEY)
             return req
     topMetas = TopMetas.objects.all().order_by('id')
     secondMetas = SecondMetas.objects.all().order_by('id')
@@ -48,6 +49,7 @@ def newArticle(request):
     }
     # 返回编辑页面
     return render(request, 'blog/markdown/newArticle.html', context)
+
 
 @login_required
 def editArticle(request, id):
@@ -75,9 +77,10 @@ def editArticle(request, id):
             datte = new_article.pub_date
             # 设置sign
             req = redirect('blog:article', year=datte.year, month=datte.month,
-                           day=datte.day, id=new_article.id)
+                           day=datte.day, title=new_article.title)
             sign = 'editSuccess'
-            req.set_signed_cookie('sign', sign, max_age=60, salt=settings.SECRET_KEY)
+            req.set_signed_cookie('sign', sign, max_age=60,
+                                  salt=settings.SECRET_KEY)
             new_article.save()
             return req
     topMetas = TopMetas.objects.all().order_by('id')
@@ -94,6 +97,7 @@ def editArticle(request, id):
     # 返回编辑页面
     return render(request, 'blog/markdown/editArticle.html', context)
 
+
 @login_required
 def deleteArticle(request, id):
     """删除文章"""
@@ -103,7 +107,8 @@ def deleteArticle(request, id):
         # 设置sign
         req = redirect('blog:index')
         sign = 'deleteSuccess'
-        req.set_signed_cookie('sign', sign, max_age=60, salt=settings.SECRET_KEY)
+        req.set_signed_cookie('sign', sign, max_age=60,
+                              salt=settings.SECRET_KEY)
         return req
     else:
         raise Http404

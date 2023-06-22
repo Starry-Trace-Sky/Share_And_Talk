@@ -8,16 +8,16 @@
                 改路径秒苏联一系列二次贝塞尔曲线的控制点坐标，从而实现了波浪形状 -->
             <defs>
                 <path id="gentle-wave"
-                      d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"/>
+                      d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path>
             </defs>
             <!-- 定义一个g元素，用于讲多个图形组合在一期，并应用一些样式
                 在g元素中使用use元素多次引用了赚钱定义的名为gentle-wave的路径元素
                 通过设置不同的x，y坐标和填充颜色，实现了波浪形状和渐变效果 -->
             <g class="parallax">
-                <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7)"/>
-                <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)"/>
-                <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)"/>
-                <use xlink:href="#gentle-wave" x="48" y="7" fill="rgba(255,255,255,0.1)"/>
+                <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7)"></use>
+                <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)"></use>
+                <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)"></use>
+                <use xlink:href="#gentle-wave" x="48" y="7" fill="rgba(255,255,255,0.1)"></use>
             </g>
 
         </svg>
@@ -33,8 +33,7 @@
             <p id="footP" class="mt-2" style="color: #069dad;"></p>
             <script type="text/javascript">
                 $(function () {
-                    var url = $(location).attr('hostname');
-                    var p = document.getElementById('footP');
+                    const p = document.getElementById('footP');
                     p.innerHTML = 'Copyright <i class="bi bi-c-square"></i> 2023 ' + location.hostname + ' All rights reserved.';
                 })
             </script>
@@ -52,6 +51,8 @@
                 {% endif %}
                 <a href="{% url 'blog:articleHelp' %}" class="btn btn-outline-secondary btn-sm text-uppercase"><i
                         class="bi bi-caret-right-fill"></i>帮助</a>
+                <a href="https://github.com/Skyler-Sun/Share_And_Talk" class="btn btn-outline-secondary btn-sm text-uppercase"><i
+                        class="bi bi-caret-right-fill"></i>github</a>
                 <script>
                     function showContact() {
                         var contact = document.getElementById('contactModal');
@@ -68,20 +69,16 @@
             </div>
         </div>
         <div class="canva-img text-center" style="isolation: isolate;">
-            <img src="{% static 'blog/images/image/footer.png' %}">
+            <img alt="底部图片" src="{% static 'blog/images/image/footer.png' %}">
         </div>
     </div>
 </footer>
-
-</div>
-
 
 <!-- back to top -->
 <button id="topBtn">
     <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-caret-up-fill"
          viewBox="0 0 16 16">
-        <path
-                d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z">
+        <path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"></path>
     </svg>
 </button>
 <style>
@@ -135,8 +132,6 @@
         padding: 9px 18px;
     }
 </style>
-</body>
-</html>
 
 {% comment %} debugger {% endcomment %}
 {% if not user.is_authenticated %}

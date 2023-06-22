@@ -39,6 +39,7 @@
             integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
     <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
@@ -265,20 +266,25 @@
             <!--footer尾部-->
             {% comment %} 给公开文章添加评论内容 {% endcomment %}
             {% if passage.public %}
-            <script src="https://giscus.app/client.js"
-                data-repo="Skyler-Sun/Share_And_Talk"
-                data-repo-id="R_kgDOJyH9YA"
-                data-category="Announcements"
-                data-category-id="DIC_kwDOJyH9YM4CXXR4"
-                data-mapping="pathname"
-                data-strict="0"
-                data-reactions-enabled="1"
-                data-emit-metadata="0"
-                data-input-position="bottom"
-                data-theme="light_high_contrast"
-                data-lang="zh-CN"
-                crossorigin="anonymous"
-                async>
-            </script>
+                <script src="https://giscus.app/client.js"
+                        data-repo="Skyler-Sun/Share_And_Talk"
+                        data-repo-id="R_kgDOJyH9YA"
+                        data-category="Announcements"
+                        data-category-id="DIC_kwDOJyH9YM4CXXR4"
+                        data-mapping="pathname"
+                        data-strict="0"
+                        data-reactions-enabled="1"
+                        data-emit-metadata="0"
+                        data-input-position="bottom"
+                        data-theme="dark_dimmed"
+                        data-lang="zh-CN"
+                        crossorigin="anonymous"
+                        async>
+                </script>
             {% endif %}
-{% include 'blog/base_footer.html' %}
+            {% include 'blog/base_footer.html' %}
+        </div>
+    </div>
+</div>
+</body>
+</html>

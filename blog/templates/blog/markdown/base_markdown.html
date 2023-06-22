@@ -8,6 +8,7 @@
     <!-- css -->
     <link rel="icon" href="{% static 'blog/images/image/favicon.ico' %}">
     <link rel="manifest" href="{% static 'blog/manifest.json' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
     <style>
         .darkmode-toggle {
@@ -233,4 +234,9 @@
 
             <!--footer尾部-->
             {% include 'blog/base_footer.html' %}
-{% include 'blog/components/modal.html' %}
+            {% include 'blog/components/modal.html' %}
+        </div>
+    </div>
+</div>
+</body>
+</html>

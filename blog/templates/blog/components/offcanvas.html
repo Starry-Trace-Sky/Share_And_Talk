@@ -3,16 +3,18 @@
 <div class="offcanvas offcanvas-end rounded" data-bs-scroll="true" tabindex="-1" id="offcanvas-aside" aria-labelledby="offcanvasWithBothOptionsLabel" style="background-color:#e7e5e4;">
     <div class="offcanvas-header" id="offcanvas-inside">
         <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Share And Talk</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
         <div class="d-flex gap-1">
             <div class="flex-grow-1">
                 <img src="{{ user.avatar }}" alt="用户头像" class="user-avatar" style="border-radius: 50%;">
-                <strong>{{ user.nickname }}</strong>
+                <strong>{{ user.nickName }}</strong>
             </div>    
             <button id="myAccount" class="btn btn-outline-secondary" type="button" style="width:initial">我的账户</button>
         </div>
         <!--offcanvas内容-->
+
         <!--用户操作-->
         <hr class="dropdown-divider">
         <div class="d-flex gap-1">
@@ -70,6 +72,62 @@
                 mm.modal('show');
             });
         </script>
+
+        <!-- 导航栏 -->
+        <div class="row">    
+            <div class="dropdown col-6">
+                <a class="btn btn-transparent dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    一级分类
+                </a>
+                <ul class="dropdown dropdown-menu">
+                    {% for topmeta in topMetas %}
+                    <li><a class="dropdown-item"
+                            href="{% url 'blog:metas_top' id=topmeta.id pageID=1 %}">{{ topmeta.text }}</a>
+                    </li>
+                    {% endfor %}
+
+                </ul>
+            </div>
+
+            <div class="dropdown col-6">
+                <a class="btn btn-transparent dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    二级分类
+                </a>
+                <ul class="dropdown-menu">
+                    {% for secondmeta in secondMetas %}
+                    <li><a class="dropdown-item"
+                            href="{% url 'blog:metas_second' id=secondmeta.id pageID=1 %}">{{ secondmeta.text }}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>        
+            
+            <div class="dropdown col-6">
+                <a class="btn btn-transparent dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    软件分类
+                </a>
+                <ul class="dropdown-menu">
+                    {% for softmeta in softMetas %}
+                    <li><a class="dropdown-item"
+                            href="{% url 'blog:metas_software' id=softmeta.id pageID=1 %}">{{ softmeta.text }}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="dropdown col-6">
+                <a class="btn btn-transparent dropdown-toggle disabled" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    敬请期待
+                </a>
+                <ul class="dropdown-menu">
+                    
+                </ul>
+            </div>
+        </div>
+
+        <hr class="border border-secondary border-2 opacity-75">
+
+        
         <!--其余内容-->
         <aside id="kratos-widget-area">
             <div id="sidebar">

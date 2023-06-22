@@ -24,7 +24,7 @@ def help(request):
     secondMetas = SecondMetas.objects.all().order_by('id')
     softMetas = SoftMetas.objects.all().order_by('id')
     context = {
-        'title' : f"Share And Talk-{passage.title}",
+        'title': f"Share And Talk-{passage.title}",
         'topMetas': topMetas,
         'secondMetas': secondMetas,
         'text': passage.getHTML(),
@@ -36,17 +36,14 @@ def help(request):
     }
     req = getSign(request, 'blog/article/articles.html', context)
     return req
-    
 
-def article(request, year, month, day, id):
+
+def article(request, year, month, day, title):
     """文章页面"""
     user = False
     loginStatus = False
     like = False
-    passage = get_object_or_404(Articles, pk=id)
-    # 校验日期是否正确
-    if (year != passage.pub_date.year) or (month != passage.pub_date.month) or (day != passage.pub_date.day):
-        raise Http404
+    passage = get_object_or_404(Articles, title=title, year=year, month=month, day=day)
     if (request.user != passage.author) and not passage.public:
         raise Http404
     if request.user == passage.author:
@@ -61,7 +58,7 @@ def article(request, year, month, day, id):
     secondMetas = SecondMetas.objects.all().order_by('id')
     softMetas = SoftMetas.objects.all().order_by('id')
     context = {
-        'title' : f"Share And Talk-{passage.title}",
+        'title': f"Share And Talk-{passage.title}",
         'topMetas': topMetas,
         'secondMetas': secondMetas,
         'text': passage.getHTML(),

@@ -1,6 +1,6 @@
 from django.db.models import Q
 from django.shortcuts import redirect, render
-from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage # 页数
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage  # 页数
 
 from .common import getSign
 from .models import TopMetas, SecondMetas, Articles
@@ -10,6 +10,7 @@ from soft.models import SoftMetas
 def index(request):
     """首页"""
     return redirect('blog:pages')
+
 
 def pages(request):
     """页数"""
@@ -22,11 +23,11 @@ def pages(request):
     # 已登录，隐藏除自己外的私密文章
     else:
         articles = (Articles.objects.order_by('-pub_date').filter(
-                        Q(public=True) | Q(public=False, author=request.user)))
-    
-    paginator = Paginator(articles, 6) # 将文章列表分页，每页显示 6 篇博客文章
-    pageNumber = request.GET.get('page') # 获取当前页码，默认为第一页
-    
+            Q(public=True) | Q(public=False, author=request.user)))
+
+    paginator = Paginator(articles, 6)  # 将文章列表分页，每页显示 6 篇博客文章
+    pageNumber = request.GET.get('page')  # 获取当前页码，默认为第一页
+
     try:
         articles = paginator.page(pageNumber)
     except PageNotAnInteger:
@@ -42,12 +43,12 @@ def pages(request):
     if int(pageNumber) != articles.number:
         return redirect('pages', page=articles.number)
     context = {
-        'title' : f'Share And Talk-第{pageNumber}页',
+        'title': f'Share And Talk-第{pageNumber}页',
         'topMetas': topMetas,
         'secondMetas': secondMetas,
         'articles': articles,
         'softMetas': softMetas,
-        #'pageCount': pageCount,
+        # 'pageCount': pageCount,
         'currentPage': id,
     }
     req = getSign(request, 'blog/index.html', context)

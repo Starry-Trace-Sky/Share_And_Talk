@@ -12,13 +12,13 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="nav navbar-nav text-white ms-auto">
-                <li class="nav-item dropdown dropdown-hover">
+                <li class="nav-item dropdown dropdown-hover dropdown-Hover">
                     <a class="nav-link dropdown-toggle" data-target="#" role="button" data-bs-toggle="dropdown"
                        aria-expanded="false">
                         一级分类
                         <b class="caret"></b>
                     </a>
-                    <ul class="dropdown-menu" style="background: rgba(40, 42, 44, .6);font-size: medium;">
+                    <ul class="dropdown-menu dropdown-menu-hover" style="background: rgba(40, 42, 44, .6);font-size: medium;">
                         {% for topmeta in topMetas %}
                             <li><a style="color: white;" class="dropdown-item"
                                    href="{% url 'blog:metas_top' id=topmeta.id pageID=1 %}">{{ topmeta.text }}</a>
@@ -26,13 +26,13 @@
                         {% endfor %}
                     </ul>
                 </li>
-                <li class="nav-item dropdown dropdown-hover">
+                <li class="nav-item dropdown dropdown-hover dropdown-Hover">
                     <a class="nav-link dropdown-toggle" data-target="#" role="button" data-bs-toggle="dropdown"
                        aria-expanded="false">
                         二级分类
                         <b class="caret"></b>
                     </a>
-                    <ul class="dropdown-menu" style="background: rgba(40, 42, 44, .6);font-size: medium;">
+                    <ul class="dropdown-menu dropdown-menu-hover" style="background: rgba(40, 42, 44, .6);font-size: medium;">
                         {% for secondmeta in secondMetas %}
                             <li><a style="color: white;" class="dropdown-item"
                                    href="{% url 'blog:metas_second' id=secondmeta.id pageID=1 %}">{{ secondmeta.text }}</a>
@@ -41,13 +41,13 @@
                     </ul>
                 </li>
 
-                <li class="nav-item dropdown dropdown-hover">
+                <li class="nav-item dropdown dropdown-hover dropdown-Hover">
                     <a class="nav-link dropdown-toggle" data-target="#" role="button" data-bs-toggle="dropdown"
                        aria-expanded="false">
                         软件分类
                         <b class="caret"></b>
                     </a>
-                    <ul class="dropdown-menu" style="background: rgba(40, 42, 44, .6);font-size: medium;">
+                    <ul class="dropdown-menu dropdown-menu-hover" style="background: rgba(40, 42, 44, .6);font-size: medium;">
                         {% for softmeta in softMetas %}
                             <li><a style="color: white;" class="dropdown-item"
                                    href="{% url 'blog:metas_software' id=softmeta.id pageID=1 %}">{{ softmeta.text }}</a>
@@ -57,7 +57,7 @@
                 </li>
                 <style>
                     @media (min-width: 991.98px) {
-                        .dropdown:hover .dropdown-menu {
+                        .dropdown-Hover:hover .dropdown-menu-hover {
                             display: block;
                             animation: slideDown .2s ease-in-out;
                         }

@@ -29,7 +29,7 @@ urlpatterns = [
     # API
     path('api/', include('api.urls')),
     # markdown插件
-    path('mdeditor/', include('mdeditor.urls'))
+    path('mdeditor/', include('mdeditor.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

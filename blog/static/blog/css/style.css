@@ -246,7 +246,7 @@ table, table tbody tr th {
 }
 
 #wpadminbar {
-    position: fixed
+    position: fixed;
 }
 
 .pagination {
