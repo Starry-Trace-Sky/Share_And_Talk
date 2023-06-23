@@ -1,5 +1,5 @@
 # Share And Talk博客网站
- 
+
 ![](https://img.shields.io/badge/Backend_developer-Skyler_Sun-blue)
 ![](https://img.shields.io/badge/Front_end_developer-xjq-purple)
 
@@ -207,12 +207,21 @@ py manage.py loaddata backup/xxx.json
 py manage.py shell
 ```
 
+4. 备份json数据
+
+```bash
+py -Xutf8 manage.py dumpdata > db.json
+```
+
 ### 运行环境
 
-```text
+```python
 asgiref==3.6.0
 certifi==2023.5.7
+cffi==1.15.1
 charset-normalizer==3.1.0
+cryptography==41.0.1
+Deprecated==1.2.14
 Django==4.2.1
 django-mdeditor==0.1.20
 django-simpleui==2023.3.1
@@ -221,10 +230,14 @@ fontawesome==5.10.1.post1
 idna==3.4
 Markdown==3.4.3
 mysqlclient==2.1.1
+pycparser==2.21
+PyGithub==1.58.2
+PyJWT==2.7.0
+PyNaCl==1.5.0
 PySnooper==1.1.1
 requests==2.30.0
 sqlparse==0.4.4
 tzdata==2023.3
 urllib3==2.0.2
-
+wrapt==1.15.0
 ```
