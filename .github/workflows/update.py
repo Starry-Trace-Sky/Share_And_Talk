@@ -38,6 +38,8 @@ with pysnooper.snoop():
     Content = ''.join(content)
     # match version position
     result = re.findall(pattern, Content)[0]
+    if result == latestTag:
+        sys.exit()
     Content = re.sub(pattern, latestTag, Content)
 
     # update REAMDE.md
