@@ -5,7 +5,7 @@
 @Author             ：Skyler Sun
 @Date               ：2023/6/22 17:16
 @用途               ：处理点赞评论
-@email              ：3385213313@qq.com
+@email              ：65846869+Skyler-Sun@users.noreply.github.com
 ==================================================
 """
 from django.views import View

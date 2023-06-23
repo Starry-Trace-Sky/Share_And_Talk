@@ -5,7 +5,7 @@
 @Author             ：Skyler Sun
 @Date               ：2023/6/22 16:36
 @用途               ：
-@email              ：3385213313@qq.com
+@email              ：65846869+Skyler-Sun@users.noreply.github.com
 ==================================================
 """
 from hashlib import md5
