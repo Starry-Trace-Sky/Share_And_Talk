@@ -18,5 +18,8 @@ jobs:
         with:
           python-version: '3.11.2'
 
+      - name: Install requirements
+        run: pip install -r requirements.txt
+
       - name: Run Python script to update README.md
         run: python .github/workflows/update.py

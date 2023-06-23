@@ -11,22 +11,23 @@
 import re
 import os
 
+import pysnooper
 
-# init vars
-pattern = r"v\d+\.\d+\.\d+"
-githubRef = os.environ.get("GITHUB_REF")
-# latest tag
-tag = githubRef.split('/')[-1]
+with pysnooper.snoop():
+    # init vars
+    pattern = r"v\d+\.\d+\.\d+"
+    githubRef = os.environ.get("GITHUB_REF")
+    # latest tag
+    tag = githubRef.split('/')[-1]
 
-with open('README.md', encoding='utf-8') as f:
-    content = f.readlines()
+    with open('README.md', encoding='utf-8') as f:
+        content = f.readlines()
 
-Content = ''.join(content)
-# match version position
-result = re.findall(pattern, Content)[0]
-Content = re.sub(pattern, tag, Content)
-print(Content)
+    Content = ''.join(content)
+    # match version position
+    result = re.findall(pattern, Content)[0]
+    Content = re.sub(pattern, tag, Content)
 
-# update REAMDE.md
-with open('README.md', 'w', encoding='utf-8') as f:
-    f.write(Content)
+    # update REAMDE.md
+    with open('README.md', 'w', encoding='utf-8') as f:
+        f.write(Content)
