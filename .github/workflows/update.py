@@ -8,5 +8,5 @@
 @email              ：3385213313@qq.com
 ==================================================
 """
-with open('../../README.md') as f:
+with open('README.md') as f:
     print(f.readlines())
