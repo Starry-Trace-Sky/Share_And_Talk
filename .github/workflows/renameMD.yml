@@ -19,4 +19,4 @@ jobs:
           python-version: '3.11.2'
 
       - name: Run Python script
-        run: python update.py
+        run: python ./.github/workflows/update.py
