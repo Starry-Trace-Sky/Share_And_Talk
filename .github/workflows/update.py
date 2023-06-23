@@ -8,5 +8,25 @@
 @email              ：3385213313@qq.com
 ==================================================
 """
-with open('README.md') as f:
-    print(f.readlines())
+import re
+import os
+
+
+# init vars
+pattern = r"v\d+\.\d+\.\d+"
+githubRef = os.environ.get("GITHUB_REF")
+# latest tag
+tag = githubRef.split('/')[-1]
+
+with open('README.md', encoding='utf-8') as f:
+    content = f.readlines()
+
+Content = ''.join(content)
+# match version position
+result = re.findall(pattern, Content)[0]
+re.sub(pattern, tag, Content)
+print(Content)
+
+# update REAMDE.md
+with open('README.md', 'w', encoding='utf-8') as f:
+    f.write(Content)

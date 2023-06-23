@@ -18,5 +18,5 @@ jobs:
         with:
           python-version: '3.11.2'
 
-      - name: Run Python script
+      - name: Run Python script to update README.md
         run: python .github/workflows/update.py
