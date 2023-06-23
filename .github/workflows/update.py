@@ -50,8 +50,12 @@ with pysnooper.snoop():
     call(['git', 'push', 'origin', 'main'])
 
     # create release
+    # 获取最新的提交对象
+    latestCommit = repo.get_commits()[0]
+
+    # 获取最新提交的 commit message 属性
     try:
-        tagMessage = latestTag.commit.message
+        tagMessage = latestCommit.commit.message
     except AttributeError:
         tagMessage = tagName
     repo.create_git_release(tag=tagName, name=tagName, message=tagMessage)
