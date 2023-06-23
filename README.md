@@ -6,7 +6,7 @@
 ![](https://img.shields.io/badge/License-MIT-red)
 ![](https://img.shields.io/badge/Language-Python-blue)
 ![](https://img.shields.io/badge/Framework-Django-yellow)
-![](https://img.shields.io/badge/Latest_Version-v1.4.3-brightgreen)
+![](https://img.shields.io/badge/Latest_Version-v1.4.4-brightgreen)
 
 ![网站主页](2023-06-21_233957.png)
 
