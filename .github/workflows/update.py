@@ -50,5 +50,8 @@ with pysnooper.snoop():
     call(['git', 'push', 'origin', 'main'])
 
     # create release
-    tagMessage = latestTag.commit.message
+    try:
+        tagMessage = latestTag.commit.message
+    except AttributeError:
+        tagMessage = tagName
     repo.create_git_release(tag=tagName, name=tagName, message=tagMessage)
