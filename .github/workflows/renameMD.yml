@@ -1,9 +1,8 @@
-name: Update README.md with v*.*.*
+name: Update README.md and publish release
 
 on:
-  label:
-    types:
-      - created
+  push:
+    main
 
 jobs:
   build:
