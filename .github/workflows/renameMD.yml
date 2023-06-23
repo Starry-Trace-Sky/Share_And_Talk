@@ -2,8 +2,8 @@ name: Update README.md and publish release
 
 on:
   push:
-    branches:
-      - main
+    tags:
+      - 'v*.*.*'
 
 jobs:
   build:

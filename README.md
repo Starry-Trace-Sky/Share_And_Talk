@@ -1,7 +1,7 @@
 # Share And Talk博客网站
 
 ![](https://img.shields.io/badge/Backend_developer-Skyler_Sun-blue)
-![](https://img.shields.io/badge/Front_end_developer-xjq-purple)
+![](https://img.shields.io/badge/Front_end_developer-XuJiaqi999-purple)
 
 ![](https://img.shields.io/badge/License-MIT-red)
 ![](https://img.shields.io/badge/Language-Python-blue)
