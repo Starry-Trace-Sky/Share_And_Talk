@@ -44,14 +44,15 @@ with pysnooper.snoop():
     with open('README.md', 'w', encoding='utf-8') as f:
         f.write(Content)
 
+    # 获取最新的提交对象
+    latestCommit = repo.get_commits()[0]
+
     # commit changes
     call(['git', 'add', '.'])
     call(['git', 'commit', '-m', 'Auto update README.md version'])
     call(['git', 'push', 'origin', 'main'])
 
     # create release
-    # 获取最新的提交对象
-    latestCommit = repo.get_commits()[0]
 
     # 获取最新提交的 commit message 属性
     try:
