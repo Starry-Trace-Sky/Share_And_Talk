@@ -23,3 +23,18 @@ jobs:
 
       - name: Run Python script to update README.md
         run: python .github/workflows/update.py
+
+      - name: Set Git Config
+        run: |
+          git config --global user.name "Skyler Sun"
+          git config --global user.email "3385213313@qq.com"
+
+      - name: Commit Changes
+        run: |
+          git add .
+          git commit -m "Commit message"
+
+      - name: Push Changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: git push origin branch-name
