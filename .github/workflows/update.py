@@ -24,7 +24,7 @@ with open('README.md', encoding='utf-8') as f:
 Content = ''.join(content)
 # match version position
 result = re.findall(pattern, Content)[0]
-re.sub(pattern, tag, Content)
+Content = re.sub(pattern, tag, Content)
 print(Content)
 
 # update REAMDE.md
