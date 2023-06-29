@@ -1,12 +1,12 @@
 from django.http import Http404
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404
 
 from .common import getSign
 from .models import TopMetas, SecondMetas, Articles
 from soft.models import SoftMetas
 
 
-def help(request):
+def Help(request):
     """帮助页面"""
     user = False
     loginStatus = False
@@ -43,7 +43,10 @@ def article(request, year, month, day, title):
     user = False
     loginStatus = False
     like = False
-    passage = get_object_or_404(Articles, title=title, year=year, month=month, day=day)
+    passage = get_object_or_404(Articles, title=title)
+    if (passage.pub_date.year != year) or (passage.pub_date.month != month) or (
+            passage.pub_date.day != day):
+        raise Http404
     if (request.user != passage.author) and not passage.public:
         raise Http404
     if request.user == passage.author:
