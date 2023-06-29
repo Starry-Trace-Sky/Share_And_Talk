@@ -89,9 +89,9 @@ DATABASES = {
         # 'ENGINE': 'django.db.backends.sqlite3',
         # 'NAME': BASE_DIR / 'db.sqlite3',
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'shareandtalk',
-        'USER': 'root',
-        'PASSWORD': 'skyler',
+        'NAME': 'Your database name',
+        'USER': 'Your account name',
+        'PASSWORD': 'Your password',
         'HOST': 'localhost',
         'PORT': '3306',
         'OPTIONS': {
