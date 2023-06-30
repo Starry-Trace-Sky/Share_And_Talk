@@ -38,12 +38,12 @@ def Help(request):
     return req
 
 
-def article(request, year, month, day, title):
+def article(request, year, month, day, id):
     """文章页面"""
     user = False
     loginStatus = False
     like = False
-    passage = get_object_or_404(Articles, title=title)
+    passage = get_object_or_404(Articles, id=id)
     if (passage.pub_date.year != year) or (passage.pub_date.month != month) or (
             passage.pub_date.day != day):
         raise Http404
