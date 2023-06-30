@@ -7,7 +7,7 @@ urlpatterns = [
     # 首页
     path('', viewPages.index, name='index'),
     # 文章页面
-    path('articles/<int:year>/<int:month>/<int:day>/<str:title>/',
+    path('articles/<int:year>/<int:month>/<int:day>/<int:id>/',
          viewArticle.article, name='article'),
     # 分类
     path('metas/top/<int:id>/page/<int:pageID>/', viewMetas.metas_top,
