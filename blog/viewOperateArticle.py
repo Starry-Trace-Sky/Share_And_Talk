@@ -32,7 +32,7 @@ def newArticle(request):
             datte = new_article.pub_date
             # 设置提示框需要的cookie
             req = redirect('blog:article', year=datte.year, month=datte.month,
-                           day=datte.day, title=new_article.title)
+                           day=datte.day, id=new_article.id)
             sign = 'createSuccess'
             req.set_signed_cookie('sign', sign, max_age=60,
                                   salt=settings.SECRET_KEY)
@@ -77,7 +77,7 @@ def editArticle(request, id):
             datte = new_article.pub_date
             # 设置sign
             req = redirect('blog:article', year=datte.year, month=datte.month,
-                           day=datte.day, title=new_article.title)
+                           day=datte.day, id=new_article.id)
             sign = 'editSuccess'
             req.set_signed_cookie('sign', sign, max_age=60,
                                   salt=settings.SECRET_KEY)
