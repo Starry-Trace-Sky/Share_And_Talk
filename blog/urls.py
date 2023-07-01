@@ -7,7 +7,7 @@ urlpatterns = [
     # 首页
     path('', viewPages.index, name='index'),
     # 文章页面
-    path('articles/<int:year>/<int:month>/<int:day>/<str:title>/',
+    path('articles/<int:year>/<int:month>/<int:day>/<int:id>/',
          viewArticle.article, name='article'),
     # 分类
     path('metas/top/<int:id>/page/<int:pageID>/', viewMetas.metas_top,
@@ -33,7 +33,7 @@ urlpatterns = [
     # 页数
     path('pages/', viewPages.pages, name='pages'),
     # 帮助页面
-    path('help/', viewArticle.help, name='articleHelp'),
+    path('help/', viewArticle.Help, name='articleHelp'),
 
     # 查看评论
     path('query_comment', viewComment.queryComment, name='queryComment'),

@@ -11,7 +11,7 @@
 
                             <!--加图模式开始-->
                             <div class='col-lg-4'>
-                                <a href="{% url 'blog:article' title=article.title year=article.pub_date.year month=article.pub_date.month day=article.pub_date.day %}">
+                                <a href="{% url 'blog:article' id=article.id year=article.pub_date.year month=article.pub_date.month day=article.pub_date.day %}">
                                     <img class='img-thumbnail rounded-start' src='{{ article.getFirstImage }}'/>
                                 </a>
                             </div>
@@ -48,7 +48,7 @@
                                             <a
                                                 class="link-dark text-decoration-none stretched-link"
                                                 title="{{ article.title }}"
-                                                href="{% url 'blog:article' title=article.title year=article.pub_date.year month=article.pub_date.month day=article.pub_date.day %}">{{ article.title }}</a></span>
+                                                href="{% url 'blog:article' id=article.id year=article.pub_date.year month=article.pub_date.month day=article.pub_date.day %}">{{ article.title }}</a></span>
                                         <div class="text-nowrap" style="border-left:5px solid white">
                                             <!--一级分类-->
                                             <span class="badge rounded-pill bg-primary">{{ article.meta_top.text }}</span>
@@ -83,7 +83,7 @@
             </span>
                                 <!-- <span class="pull-right">
             <a class="link-secondary text-decoration-none"
-               href="{% url 'blog:article' title=article.title year=article.pub_date.year month=article.pub_date.month day=article.pub_date.day %}">阅读全文 <i
+               href="{% url 'blog:article' id=article.id year=article.pub_date.year month=article.pub_date.month day=article.pub_date.day %}">阅读全文 <i
                     class="bi bi-arrow-up-left-circle-fill"></i></a>
             </span> -->
                             </div>
